@@ -57,7 +57,7 @@ function setMarqueeDuration(marqueeEl) {
 	if (!set) return;
 	const px = set.getBoundingClientRect().width;
 	// ~80px/sec baseline
-	const seconds = Math.max(18, Math.min(60, px / 80));
+	const seconds = Math.max(30.9, Math.min(61.8, px / 30.9));
 	marqueeEl.style.setProperty('--duration', `${seconds}s`);
 }
 

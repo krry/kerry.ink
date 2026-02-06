@@ -1,12 +1,10 @@
 # kerry.ink
 
-Static landing page.
-
-## Local preview
+2026 home of kerry alan snyder
 
 Just open `index.html`.
 
-## Deploy (Vercel)
+## Deployed with (Vercel)
 
 - Import this repo in Vercel
 - Framework preset: **Other**
