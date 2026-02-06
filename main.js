@@ -12,25 +12,67 @@ const epithets = [
 	'agent wrangler'
 ];
 
-const el = document.getElementById('epithet');
+function buildEpithetMarquee() {
+	const track = document.getElementById('epithetTrack');
+	if (!track) return;
 
-if (el) {
-	let i = 0;
-	el.textContent = epithets[i];
+	track.innerHTML = '';
 
-	const tick = () => {
-		const next = epithets[(i + 1) % epithets.length];
+	// One "set" of epithets
+	const set = document.createElement('div');
+	set.className = 'marquee__set';
 
-		el.classList.add('is-out');
-		window.setTimeout(() => {
-			i = (i + 1) % epithets.length;
-			el.textContent = next;
-			el.classList.remove('is-out');
-		}, 360);
-	};
+	for (const e of epithets) {
+		const item = document.createElement('span');
+		item.className = 'epithet__item';
+		item.textContent = e;
+		set.appendChild(item);
 
-	// let the first paint land
-	window.setTimeout(() => {
-		window.setInterval(tick, 2400);
-	}, 600);
+		const dot = document.createElement('span');
+		dot.className = 'epithet__dot';
+		dot.textContent = '•';
+		set.appendChild(dot);
+	}
+
+	// add two copies for seamless looping
+	track.appendChild(set);
+	track.appendChild(set.cloneNode(true));
 }
+
+function duplicateTrack(selector) {
+	const track = document.querySelector(selector);
+	if (!track) return;
+
+	// if already duplicated, skip
+	if (track.querySelector(':scope > .marquee__set')) return;
+
+	// Wrap existing children into a set, then clone.
+	const set = document.createElement('div');
+	set.className = 'marquee__set';
+	while (track.firstChild) set.appendChild(track.firstChild);
+	track.appendChild(set);
+	track.appendChild(set.cloneNode(true));
+}
+
+function setMarqueeDuration(el) {
+	// Duration scales with content width so it doesn't feel too fast on desktop.
+	const set = el.querySelector('.marquee__set');
+	if (!set) return;
+	const px = set.getBoundingClientRect().width;
+	// ~80px/sec baseline
+	const seconds = Math.max(18, Math.min(60, px / 80));
+	el.style.setProperty('--duration', `${seconds}s`);
+}
+
+buildEpithetMarquee();
+duplicateTrack('#linksTrack');
+
+for (const marquee of document.querySelectorAll('.marquee')) {
+	setMarqueeDuration(marquee);
+}
+
+window.addEventListener('resize', () => {
+	for (const marquee of document.querySelectorAll('.marquee')) {
+		setMarqueeDuration(marquee);
+	}
+});
