@@ -1,109 +1,121 @@
-"use strict";var WebringWidget=(()=>{var o=Object.defineProperty;var b=Object.getOwnPropertyDescriptor;var h=Object.getOwnPropertyNames;var c=Object.prototype.hasOwnProperty;var m=(r,t,e)=>t in r?o(r,t,{enumerable:!0,configurable:!0,writable:!0,value:e}):r[t]=e;var p=(r,t)=>{for(var e in t)o(r,e,{get:t[e],enumerable:!0})},u=(r,t,e,a)=>{if(t&&typeof t=="object"||typeof t=="function")for(let i of h(t))!c.call(r,i)&&i!==e&&o(r,i,{get:()=>t[i],enumerable:!(a=b(t,i))||a.enumerable});return r};var w=r=>u(o({},"__esModule",{value:!0}),r);var s=(r,t,e)=>(m(r,typeof t!="symbol"?t+"":t,e),e);var v={};p(v,{default:()=>f});async function g(r){if(typeof r=="object"&&r!==null)return r;if(typeof r=="string"){let t=await fetch(r);if(!t.ok)throw new Error(`Failed to fetch webring data from ${r}: ${t.statusText}`);return t.json()}throw new Error("Invalid data source: must be a URL string or WebringData object")}function l(r){return typeof r=="object"&&typeof r.version=="string"&&Array.isArray(r.links)&&r.links.every(t=>typeof t.name=="string"&&typeof t.url=="string")}var d=class extends HTMLElement{constructor(){super();s(this,"shadow");s(this,"data",null);s(this,"loading",!1);s(this,"expanded",!1);this.shadow=this.attachShadow({mode:"open"})}static get observedAttributes(){return["data-source","mode","theme"]}async connectedCallback(){this.render(),await this.loadData(),window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>{this.getAttribute("theme")==="auto"&&this.render()})}async attributeChangedCallback(e,a,i){e==="data-source"?(this.data=null,await this.loadData(),this.render()):this.render()}async loadData(){if(this.loading)return;let e=this.getAttribute("data-source");if(!e){this.renderError("No data-source attribute provided");return}this.loading=!0,this.renderLoading();try{if(this.data=await g(e),!l(this.data)){this.renderError("Invalid webring data format");return}this.render()}catch(a){let i=a instanceof Error?a.message:"Failed to load webring data";this.renderError(i)}finally{this.loading=!1}}resolveTheme(){let e=this.getAttribute("theme")||"auto";return e==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light":e}render(){let e=this.getAttribute("mode")||"compact",a=this.resolveTheme();if(!this.data)return;let i=`
+"use strict";var WebringWidget=(()=>{var g=Object.defineProperty;var m=(t,e,a)=>e in t?g(t,e,{enumerable:!0,configurable:!0,writable:!0,value:a}):t[e]=a;var i=(t,e,a)=>(m(t,typeof e!="symbol"?e+"":e,a),a);async function n(t){if(typeof t=="object"&&t!==null)return t;if(typeof t=="string"){let e=await fetch(t);if(!e.ok)throw new Error(`Failed to fetch webring data from ${t}: ${e.statusText}`);return e.json()}throw new Error("Invalid data source: must be a URL string or WebringData object")}function l(t){return typeof t=="object"&&typeof t.version=="string"&&Array.isArray(t.links)&&t.links.every(e=>typeof e.name=="string"&&typeof e.url=="string")}var s=class extends HTMLElement{constructor(){super();i(this,"shadow");i(this,"data",null);i(this,"loading",!1);this.shadow=this.attachShadow({mode:"open"})}static get observedAttributes(){return["data-source","mode","theme"]}async connectedCallback(){await this.loadData(),window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>{this.getAttribute("theme")==="auto"&&this.render()})}async attributeChangedCallback(a){a==="data-source"?(this.data=null,await this.loadData()):this.render()}async loadData(){if(this.loading)return;let a=this.getAttribute("data-source");if(a){this.loading=!0;try{let r=await n(a);l(r)&&(this.data=r,this.render())}catch(r){console.error("Webring failed to load",r)}finally{this.loading=!1}}}resolveTheme(){let a=this.getAttribute("theme")||"auto";return a==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light":a}render(){if(!this.data)return;let r=this.resolveTheme()==="dark",d=`
+      ${`
       <style>
+        @import url('https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,MONO@-15..0,300..1000,0..1,0..1&display=swap');
+
         :host {
-          /* Light mode defaults (glass effect) */
-          --glass-bg: rgba(255, 255, 255, 0.5);
-          --glass-border: rgba(255, 255, 255, 0.62);
-          --text: rgba(0, 0, 0, 0.82);
-          --muted: rgba(0, 0, 0, 0.62);
-          --shadow: rgba(0, 0, 0, 0.18);
-          --blur: 18px;
+          display: block;
+          font-family: 'Recursive', system-ui, sans-serif;
+          --glass-bg: ${r?"rgba(20, 20, 20, 0.6)":"rgba(255, 255, 255, 0.6)"};
+          --glass-border: ${r?"rgba(255, 255, 255, 0.1)":"rgba(255, 255, 255, 0.4)"};
+          --text: ${r?"#e0e0e0":"#1a1a1a"};
+          --text-muted: ${r?"#a0a0a0":"#666"};
+          --hover-bg: ${r?"rgba(255, 255, 255, 0.05)":"rgba(0, 0, 0, 0.05)"};
+          --shadow: ${r?"0 8px 32px rgba(0, 0, 0, 0.4)":"0 8px 32px rgba(0, 0, 0, 0.1)"};
         }
 
-        .webring {
-          color: var(--text);
+        details {
           background: var(--glass-bg);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
           border: 1px solid var(--glass-border);
-          backdrop-filter: blur(var(--blur));
-          -webkit-backdrop-filter: blur(var(--blur));
-          box-shadow: 0 12px 40px var(--shadow);
           border-radius: 12px;
-          padding: 1rem;
-          font-family: system-ui, -apple-system, sans-serif;
-          cursor: pointer;
-          transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: var(--shadow);
+          color: var(--text);
+          width: max-content;
+          transition: all 0.2s ease;
           overflow: hidden;
         }
 
-        .webring--collapsed {
-          padding: 0.75rem;
-          max-height: 2.25rem;
+        details[open] {
+          width: 200px;
         }
 
-        .webring--expanded {
-          max-height: 500px;
+        summary {
+          list-style: none;
+          cursor: pointer;
+          padding: 0.5rem 0.75rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-weight: 500;
+          user-select: none;
+          outline: none;
         }
 
-        .webring--dark {
-          --glass-bg: rgba(255, 255, 255, 0.14);
-          --glass-border: rgba(255, 255, 255, 0.28);
-          --text: rgba(255, 255, 255, 0.92);
-          --muted: rgba(255, 255, 255, 0.7);
-          --shadow: rgba(0, 0, 0, 0.35);
+        summary::-webkit-details-marker {
+          display: none;
         }
 
-        .webring__title {
-          margin: 0;
-          font-size: 1.5em;
-          font-weight: 600;
-          text-align: center;
-          transition: margin 300ms ease;
+        summary:hover {
+          background: var(--hover-bg);
         }
 
-        .webring--expanded .webring__title {
-          margin-bottom: 0.5rem;
+        /* Rotating caret */
+        summary::after {
+          content: '\u203A';
+          display: inline-block;
+          font-family: system-ui; /* Reliable arrow */
+          margin-left: auto;
+          transition: transform 0.2s ease;
+          font-size: 1.2em;
+          line-height: 1;
         }
 
-        .webring__links {
+        details[open] summary::after {
+          transform: rotate(90deg);
+        }
+
+        /* Title link */
+        .title-link {
+          color: inherit;
+          text-decoration: none;
+          font-weight: 800;
+          font-variation-settings: 'CASL' 1, 'MONO' 0;
+          margin-right: 0.25rem;
+        }
+        
+        .title-link:hover {
+          text-decoration: underline;
+          text-decoration-thickness: 2px;
+        }
+
+        ul {
           list-style: none;
           padding: 0;
           margin: 0;
-          opacity: 0;
-          transform: translateY(-10px);
-          transition: opacity 300ms ease, transform 300ms ease;
-          pointer-events: none;
+          border-top: 1px solid var(--glass-border);
         }
 
-        .webring--expanded .webring__links {
-          opacity: 1;
-          transform: translateY(0);
-          pointer-events: auto;
-        }
-
-        .webring__link-item {
-          margin: 0.5rem 0;
-        }
-
-        .webring__link {
+        li a {
+          display: block;
+          padding: 0.5rem 0.75rem;
           color: var(--text);
           text-decoration: none;
-          opacity: 0.85;
-          transition: opacity 120ms ease;
-        }
-
-        .webring__link:hover {
-          opacity: 1;
-        }
-
-        .webring__description {
-          margin: 0.25rem 0 0 0;
           font-size: 0.9em;
-          color: var(--muted);
+          transition: background 0.15s ease, padding-left 0.15s ease;
+        }
+
+        li a:hover {
+          background: var(--hover-bg);
+          padding-left: 1rem;
+          color: var(--text);
         }
       </style>
-
-      <div class="webring webring--${e}${a==="dark"?" webring--dark":""}${this.expanded?" webring--expanded":" webring--collapsed"}">
-        <h3 class="webring__title">\u{1FAE0}\u2712\uFE0F</h3>
-        <ul class="webring__links">
-          ${this.data.links.map(n=>`
-            <li class="webring__link-item">
-              <a href="${n.url}" class="webring__link" title="${n.description||n.name}">
-                ${n.name}
+    `}
+      <details>
+        <summary>
+          <a href="https://kerry.ink" class="title-link" target="_blank">\u{1FAE0}\u2712\uFE0F</a>
+        </summary>
+        <ul>
+          ${this.data.links.map(o=>`
+            <li>
+              <a href="${o.url}" title="${o.description||""}" target="_blank">
+                ${o.name}
               </a>
-              ${n.description&&e==="full"?`<p class="webring__description">${n.description}</p>`:""}
             </li>
           `).join("")}
         </ul>
-      </div>
-    `;this.shadow.innerHTML=i,this.attachEventListeners()}attachEventListeners(){let e=this.shadow.querySelector(".webring");e&&(e.addEventListener("click",()=>{this.expanded=!this.expanded,this.render()}),e.addEventListener("mouseenter",()=>{this.expanded||(this.expanded=!0,this.render())}))}renderLoading(){this.shadow.innerHTML='<div style="padding: 1rem; text-align: center;">Loading webring...</div>'}renderError(e){this.shadow.innerHTML=`<div style="padding: 1rem; color: #c33; background: #fdd; border: 1px solid #fbb; border-radius: 4px;">Error: ${e}</div>`}};customElements.get("webring-widget")||customElements.define("webring-widget",d);var f=d;return w(v);})();
+      </details>
+    `;this.shadow.innerHTML=d}};customElements.get("webring-widget")||customElements.define("webring-widget",s);})();
 //# sourceMappingURL=webring.wc.js.map
