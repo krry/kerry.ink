@@ -109,6 +109,7 @@
 
         .logo-nib {
           font-size: 3em;
+          line-height: 1.2;
         }
         
         .logo-text {
