@@ -4,46 +4,69 @@
     {
       "name": "orphics",
       "url": "https://orfx.kerry.ink",
-      "description": "By agents, for agents"
+      "description": "By agents, for agents",
+      "emoji": "🦾",
+      "color": "#6294DA"
     },
     {
       "name": "nameless",
       "url": "https://nameless.kerry.ink",
-      "description": "I Ching for Millennials"
+      "description": "I Ching for Millennials",
+      "emoji": "🔮",
+      "color": "#F448B8"
     },
     {
       "name": "levelOut",
       "url": "https://level.out.kerry.ink",
-      "description": "Soul Candy Jar"
+      "description": "Soul Candy Jar",
+      "emoji": "🍬",
+      "color": "#8b5cf6"
     },
     {
       "name": "easeness",
       "url": "https://easeness.kerry.ink",
-      "description": "The opposite of business?"
+      "description": "The opposite of business?",
+      "emoji": "🛼",
+      "color": "#48F4DD"
     },
     {
       "name": "inkwell",
       "url": "https://inkwell.kerry.ink",
-      "description": "Draw out your shadow"
+      "description": "Draw out your shadow",
+      "emoji": "🫟",
+      "color": "#484BF4"
     },
     {
       "name": "krry.dev",
       "url": "https://dev.kerry.ink",
-      "description": "My old hack-a-thon portfolio"
+      "description": "My old hack-a-thon portfolio",
+      "emoji": "👨🏼💻",
+      "color": "#48F4C1"
     },
     {
       "name": "passage",
       "url": "https://passage.kerry.ink",
-      "description": "Nice clock"
+      "description": "Nice clock",
+      "emoji": "⏳",
+      "color": "#8748F4"
     },
     {
       "name": "kamadhenu",
       "url": "https://kamadhenu.kerry.ink",
-      "description": "Fortune oracle with cowsay"
+      "description": "Fortune oracle with cowsay",
+      "emoji": "🐄",
+      "color": "#A4CA0C"
+    },
+    {
+      "name": "souvenir",
+      "url": "https://souvenir.kerry.ink",
+      "description": "The opposite of doomscroll",
+      "emoji": "🎞️",
+      "color": "#F4486C"
     }
   ],
   "metadata": {
-    "updated": "2026-02-19T07:26:00Z",
-    "count": 7
+    "updated": "2026-03-02T00:00:00Z",
+    "count": 9
   }
 }
