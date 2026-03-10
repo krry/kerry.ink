@@ -2,6 +2,13 @@
   "version": "1.0.0",
   "links": [
     {
+      "name": "souvenir",
+      "url": "https://souvenir.kerry.ink",
+      "description": "Not your mother's doomscroll",
+      "emoji": "🎞️",
+      "color": "#F4486C"
+    },
+    {
       "name": "orphics",
       "url": "https://orfx.kerry.ink",
       "description": "By agents, for agents",
@@ -14,6 +21,13 @@
       "description": "I Ching for Millennials",
       "emoji": "🔮",
       "color": "#F448B8"
+    },
+    {
+      "name": "inkwell",
+      "url": "https://inkwell.kerry.ink",
+      "description": "Draw out your shadow",
+      "emoji": "🫟",
+      "color": "#484BF4"
     },
     {
       "name": "levelOut",
@@ -30,20 +44,6 @@
       "color": "#48F4DD"
     },
     {
-      "name": "inkwell",
-      "url": "https://inkwell.kerry.ink",
-      "description": "Draw out your shadow",
-      "emoji": "🫟",
-      "color": "#484BF4"
-    },
-    {
-      "name": "krry.dev",
-      "url": "https://dev.kerry.ink",
-      "description": "My old hack-a-thon portfolio",
-      "emoji": "👨🏼💻",
-      "color": "#48F4C1"
-    },
-    {
       "name": "passage",
       "url": "https://passage.kerry.ink",
       "description": "Nice clock",
@@ -57,13 +57,6 @@
       "emoji": "🐄",
       "color": "#A4CA0C"
     },
-    {
-      "name": "souvenir",
-      "url": "https://souvenir.kerry.ink",
-      "description": "The opposite of doomscroll",
-      "emoji": "🎞️",
-      "color": "#F4486C"
-    }
   ],
   "metadata": {
     "updated": "2026-03-02T00:00:00Z",
