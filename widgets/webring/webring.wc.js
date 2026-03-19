@@ -1,22 +1,34 @@
-"use strict";var WebringWidget=(()=>{var w=Object.defineProperty;var x=(a,i,e)=>i in a?w(a,i,{enumerable:!0,configurable:!0,writable:!0,value:e}):a[i]=e;var l=(a,i,e)=>(x(a,typeof i!="symbol"?i+"":i,e),e);async function g(a){if(typeof a=="object"&&a!==null)return a;if(typeof a=="string"){let i=await fetch(a);if(!i.ok)throw new Error(`Failed to fetch webring data from ${a}: ${i.statusText}`);return i.json()}throw new Error("Invalid data source: must be a URL string or WebringData object")}function m(a){return typeof a=="object"&&typeof a.version=="string"&&Array.isArray(a.links)&&a.links.every(i=>typeof i.name=="string"&&typeof i.url=="string")}var d=class extends HTMLElement{constructor(){super();l(this,"shadow");l(this,"data",null);l(this,"loading",!1);this.shadow=this.attachShadow({mode:"open"})}static get observedAttributes(){return["data-source","size","theme"]}async connectedCallback(){await this.loadData(),window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>{this.getAttribute("theme")==="auto"&&this.updateTheme()})}async attributeChangedCallback(e,t,o){t!==o&&(e==="data-source"?(this.data=null,await this.loadData()):e==="size"?this.updateSize(o):e==="theme"&&this.updateTheme())}async loadData(){if(this.loading)return;let e=this.getAttribute("data-source");if(e){this.loading=!0;try{let t=await g(e);m(t)&&(this.data=t,this.render())}catch(t){console.error("Webring failed to load",t)}finally{this.loading=!1}}}resolveTheme(){let e=this.getAttribute("theme")||"auto";return e==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light":e}getSize(){return this.getAttribute("size")||"small"}updateSize(e){let t=this.shadow.querySelector(".widget");t&&t.setAttribute("data-size",e)}updateTheme(){this.render()}getLinkColor(e){if(e.color)return e.color;let t=e.url;return t.includes("github.com")?"#6e5494":t.includes("twitter.com")||t.includes("x.com")?"#1da1f2":t.includes("mastodon")?"#6364ff":t.includes("linkedin")?"#0077b5":t.includes("youtube")?"#ff0000":t.includes("instagram")?"#e4405f":t.includes("strangerloops")?"#ff6b6b":t.includes("svnr")?"#48D2F4":"#8b5cf6"}render(){if(!this.data)return;let t=this.resolveTheme()==="dark",o=this.getSize(),c=this.data.links.map((r,s)=>{let n=this.getLinkColor(r),u=parseInt(n.slice(1,3),16),b=parseInt(n.slice(3,5),16),v=parseInt(n.slice(5,7),16);return`
+"use strict";var WebringWidget=(()=>{var w=Object.defineProperty;var x=(i,a,t)=>a in i?w(i,a,{enumerable:!0,configurable:!0,writable:!0,value:t}):i[a]=t;var l=(i,a,t)=>(x(i,typeof a!="symbol"?a+"":a,t),t);async function g(i){if(typeof i=="object"&&i!==null)return i;if(typeof i=="string"){let a=await fetch(i);if(!a.ok)throw new Error(`Failed to fetch webring data from ${i}: ${a.statusText}`);return a.json()}throw new Error("Invalid data source: must be a URL string or WebringData object")}function m(i){return typeof i=="object"&&typeof i.version=="string"&&Array.isArray(i.links)&&i.links.every(a=>typeof a.name=="string"&&typeof a.url=="string")}var d=class extends HTMLElement{constructor(){super();l(this,"shadow");l(this,"data",null);l(this,"loading",!1);this.shadow=this.attachShadow({mode:"open"})}static get observedAttributes(){return["data-source","size","theme"]}async connectedCallback(){await this.loadData(),window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>{this.getAttribute("theme")==="auto"&&this.updateTheme()})}async attributeChangedCallback(t,e,o){e!==o&&(t==="data-source"?(this.data=null,await this.loadData()):t==="size"?this.updateSize(o):t==="theme"&&this.updateTheme())}async loadData(){if(this.loading)return;let t=this.getAttribute("data-source");if(t){this.loading=!0;try{let e=await g(t);m(e)&&(this.data=e,this.render())}catch(e){console.error("Webring failed to load",e)}finally{this.loading=!1}}}resolveTheme(){let t=this.getAttribute("theme")||"auto";return t==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light":t}getSize(){return this.getAttribute("size")||"small"}updateSize(t){let e=this.shadow.querySelector(".widget");e&&e.setAttribute("data-size",t)}updateTheme(){this.render()}getLinkColor(t){if(t.color)return t.color;let e=t.url;return e.includes("github.com")?"#6e5494":e.includes("twitter.com")||e.includes("x.com")?"#1da1f2":e.includes("mastodon")?"#6364ff":e.includes("linkedin")?"#0077b5":e.includes("youtube")?"#ff0000":e.includes("instagram")?"#e4405f":e.includes("strangerloops")?"#ff6b6b":e.includes("svnr")?"#48D2F4":"#8b5cf6"}render(){if(!this.data)return;let e=this.resolveTheme()==="dark",o=this.getSize(),c=this.data.links.map((r,s)=>{let n=this.getLinkColor(r),u=parseInt(n.slice(1,3),16),b=parseInt(n.slice(3,5),16),v=parseInt(n.slice(5,7),16);return`
       .link-${s}:hover {
-        background: rgba(${u}, ${b}, ${v}, ${t?"0.2":"0.15"});
+        background: rgba(${u}, ${b}, ${v}, ${e?"0.2":"0.15"});
         border-left: 3px solid ${n};
         padding-left: calc(0.75em - 3px);
       }
     `}).join(""),p=`
       <style>
-        @import url('https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,MONO@-15..0,300..1000,0..1,0..1&display=swap');
-
         :host {
           display: block;
-          font-family: 'Recursive', system-ui, sans-serif;
-          --glass-bg: ${t?"rgba(20, 20, 20, 0.6)":"rgba(255, 255, 255, 0.7)"};
-          --glass-border: ${t?"rgba(255, 255, 255, 0.15)":"rgba(255, 255, 255, 0.5)"};
-          --text: ${t?"#e0e0e0":"#1a1a1a"};
-          --text-muted: ${t?"#a0a0a0":"#666"};
-          --hover-bg: ${t?"rgba(255, 255, 255, 0.05)":"rgba(0, 0, 0, 0.05)"};
-          --shadow: ${t?"0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3)":"0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)"};
+          font-family: system-ui, sans-serif;
+          /* Responsive positioning \u2014 can be overridden inline */
+          --widget-bottom: 2rem;
+          --widget-right: 2rem;
+          position: fixed;
+          bottom: var(--widget-bottom);
+          right: var(--widget-right);
+          z-index: 1000;
+          /* Mobile responsive */
+          @media (max-width: 640px) {
+            --widget-bottom: 1rem;
+            --widget-right: 1rem;
+            left: 1rem;
+            right: 1rem;
+          }
+          --glass-bg: ${e?"rgba(20, 20, 20, 0.6)":"rgba(255, 255, 255, 0.7)"};
+          --glass-border: ${e?"rgba(255, 255, 255, 0.15)":"rgba(255, 255, 255, 0.5)"};
+          --text: ${e?"#e0e0e0":"#1a1a1a"};
+          --text-muted: ${e?"#a0a0a0":"#666"};
+          --hover-bg: ${e?"rgba(255, 255, 255, 0.05)":"rgba(0, 0, 0, 0.05)"};
+          --shadow: ${e?"0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3)":"0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)"};
           --spring: cubic-bezier(0.34, 1.26, 0.64, 1);
         }
 
@@ -36,7 +48,7 @@
           cursor: pointer;
           transition: all 0.2s ease;
           z-index: 10;
-          color: ${t?"rgba(255, 255, 255, 0.3)":"rgba(0, 0, 0, 0.2)"};
+          color: ${e?"rgba(255, 255, 255, 0.3)":"rgba(0, 0, 0, 0.2)"};
           transform: scale(1) rotate(40deg);
         }
         
@@ -48,7 +60,7 @@
 
         .handle:hover {
           transform: scale(1.15) rotate(45deg);
-          color: ${t?"rgba(255, 255, 255, 0.5)":"rgba(0, 0, 0, 0.35)"}; 
+          color: ${e?"rgba(255, 255, 255, 0.5)":"rgba(0, 0, 0, 0.35)"}; 
         }
 
         .handle:active {
@@ -62,7 +74,7 @@
           border: 1px solid var(--glass-border);
           box-shadow: var(--shadow);
           color: var(--text);
-          font-size: 0.8em;
+          font-size: clamp(14px, 2.5vw, 16px);
           position: relative;
           overflow: hidden;
           will-change: width, height, border-radius;
@@ -82,15 +94,17 @@
         }
 
         .widget[data-size="medium"] {
-          width: 112px;
+          width: min(90vw, 320px);
+          max-width: 320px;
+          min-width: 180px;
           height: auto;
           min-height: 64px;
           border-radius: 20px;
         }
 
         .widget:hover {
-          box-shadow: ${t?"0 12px 48px rgba(0, 0, 0, 0.6), 0 4px 12px rgba(0, 0, 0, 0.4)":"0 12px 48px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1)"};
-          border-color: ${t?"rgba(255, 255, 255, 0.25)":"rgba(255, 255, 255, 0.7)"};
+          box-shadow: ${e?"0 12px 48px rgba(0, 0, 0, 0.6), 0 4px 12px rgba(0, 0, 0, 0.4)":"0 12px 48px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1)"};
+          border-color: ${e?"rgba(255, 255, 255, 0.25)":"rgba(255, 255, 255, 0.7)"};
           transform: translateY(-2px);
         }
 
@@ -113,8 +127,7 @@
         }
         
         .logo-text {
-          font-family: 'Recursive', cursive;
-          font-variation-settings: 'CASL' 0.5, 'wght' 500, 'MONO' 0;
+          font-family: system-ui, sans-serif;
           color: var(--text);
           text-decoration: none;
           text-indent: 1em;
@@ -180,18 +193,18 @@
         .links a {
           display: flex;
           align-items: center;
-          gap: 0.309em;
-          padding: 0.618em;
+          gap: 0.5em;
+          padding: 0.75em 1em;
           color: var(--text);
           text-decoration: none;
           font-size: 0.9em;
-          font-variation-settings: 'CASL' 0.5, 'wght' 450;
           transition: all 0.3s var(--spring);
           border-left: 3px solid transparent;
         }
 
         .widget[data-size="medium"] .links a {
           font-size: 1em;
+          min-height: 44px; /* Ensure tap target */
         }
         
         .links a span {
