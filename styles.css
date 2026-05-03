@@ -106,11 +106,47 @@ body {
 	text-align: center;
 }
 
-.title {
-    margin: 0.1618em auto 0.618em;
-	letter-spacing: -0.02em;
-	font-size: clamp(30px, 4.5vw, 54px);
-	line-height: 1.05;
+.preamble {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	width: 100%;
+	margin-bottom: 0.5em;
+	overflow: hidden;
+}
+
+.name {
+	flex-shrink: 0;
+	font-size: clamp(10px, 1.3vw, 12px);
+	font-variation-settings: "wght" 360, "CASL" 0, "CRSV" 0, "MONO" 0;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--muted);
+	line-height: 1.2;
+	white-space: nowrap;
+}
+
+.preamble .epithet {
+	flex: 1;
+	margin: 0;
+	min-width: 0;
+}
+
+.headline {
+	margin: 0 auto 0.3em;
+	font-size: clamp(28px, 4.8vw, 58px);
+	font-variation-settings: "wght" 900, "CASL" 1, "CRSV" 1, "MONO" 0;
+	letter-spacing: -0.03em;
+	line-height: 1.0;
+}
+
+.currently {
+	margin: 8px auto 4px;
+	font-size: clamp(11px, 1.5vw, 13px);
+	font-variation-settings: "wght" 400, "CASL" 0.5, "CRSV" 0.8, "MONO" 0;
+	color: var(--muted);
+	font-style: italic;
+	letter-spacing: 0.01em;
 }
 
 .rule {
@@ -260,6 +296,66 @@ body {
 		background: rgba(255, 255, 255, 0.5);
 		border-color: rgba(0, 0, 0, 0.08);
 	}
+}
+
+.attr {
+	position: fixed;
+	bottom: 10px;
+	right: 14px;
+	font-size: 10px;
+	font-variation-settings: "wght" 340, "CASL" 0, "CRSV" 0, "MONO" 0;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--muted);
+	opacity: 0.45;
+	text-decoration: none;
+	transition: opacity 120ms ease;
+}
+
+.attr:hover {
+	opacity: 0.9;
+}
+
+.featured {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	padding: 16px 12px 8px;
+	width: 100%;
+}
+
+.featured__item {
+	text-align: center;
+}
+
+.featured__name {
+	display: inline-block;
+	text-decoration: none;
+	color: inherit;
+	font-size: clamp(15px, 2.2vw, 20px);
+	font-variation-settings: "wght" 720, "CASL" 0.5, "CRSV" 0.3, "MONO" 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+	padding-bottom: 2px;
+	transition: opacity 120ms ease;
+}
+
+.featured__name:hover {
+	opacity: 0.72;
+}
+
+@media (prefers-color-scheme: light) {
+	.featured__name {
+		border-bottom-color: rgba(0, 0, 0, 0.15);
+	}
+}
+
+.featured__desc {
+	margin: 5px auto 0;
+	font-size: clamp(11px, 1.55vw, 13px);
+	font-variation-settings: "wght" 380, "CASL" 0.4, "CRSV" 0.2, "MONO" 0;
+	color: var(--muted);
+	line-height: 1.55;
+	max-width: 400px;
 }
 
 @media (max-width: 520px) {
