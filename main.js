@@ -95,3 +95,80 @@ function updateParallax() {
 window.addEventListener('scroll', updateParallax, { passive: true });
 window.addEventListener('resize', updateParallax);
 updateParallax();
+
+// Headline letter morph — Recursive variable font derivations
+const DERIVATIONS = [
+	// mono linear light
+	'"wght" 300, "CASL" 0, "CRSV" 0, "MONO" 1',
+	// sans linear black
+	'"wght" 1000, "CASL" 0, "CRSV" 0, "MONO" 0',
+	// sans casual light cursive
+	'"wght" 300, "CASL" 1, "CRSV" 1, "MONO" 0',
+	// mono linear bold
+	'"wght" 800, "CASL" 0, "CRSV" 0, "MONO" 1',
+	// semi-mono casual
+	'"wght" 500, "CASL" 1, "CRSV" 0, "MONO" 0.618',
+	// sans casual black cursive
+	'"wght" 900, "CASL" 1, "CRSV" 1, "MONO" 0',
+	// mono casual medium
+	'"wght" 600, "CASL" 0.618, "CRSV" 0, "MONO" 1',
+];
+
+const BASE_FVS = '"wght" 900, "CASL" 1, "CRSV" 1, "MONO" 0';
+
+function setupHeadlineMorph() {
+	if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+	const headline = document.querySelector('.headline');
+	if (!headline) return;
+
+	const text = headline.textContent;
+	headline.textContent = '';
+
+	const spans = [];
+	for (let i = 0; i < text.length; i++) {
+		const ch = text[i];
+		if (ch === ' ') {
+			headline.appendChild(document.createTextNode(' '));
+			spans.push(null);
+		} else {
+			const s = document.createElement('span');
+			s.className = 'hl';
+			s.textContent = ch;
+			// each letter gets a derivation, cycling through the list
+			s.dataset.fvs = DERIVATIONS[i % DERIVATIONS.length];
+			headline.appendChild(s);
+			spans.push(s);
+		}
+	}
+
+	function applyRipple(idx) {
+		spans.forEach((s, i) => {
+			if (!s) return;
+			const dist = Math.abs(i - idx);
+			if (dist === 0) {
+				s.style.fontVariationSettings = s.dataset.fvs;
+			} else if (dist === 1) {
+				// blend halfway toward the neighbor's own derivation
+				s.style.fontVariationSettings = DERIVATIONS[(i + 1) % DERIVATIONS.length];
+			} else if (dist === 2) {
+				s.style.fontVariationSettings = DERIVATIONS[i % DERIVATIONS.length];
+			} else {
+				s.style.fontVariationSettings = '';
+			}
+		});
+	}
+
+	function resetAll() {
+		spans.forEach(s => { if (s) s.style.fontVariationSettings = ''; });
+	}
+
+	spans.forEach((s, i) => {
+		if (!s) return;
+		s.addEventListener('mouseenter', () => applyRipple(i));
+	});
+
+	headline.addEventListener('mouseleave', resetAll);
+}
+
+setupHeadlineMorph();
