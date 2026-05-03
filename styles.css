@@ -2,6 +2,9 @@
 	/* glass */
 	--glass-bg: rgba(255, 255, 255, 0.14);
 	--glass-border: rgba(255, 255, 255, 0.28);
+	--glass-thin-bg: rgba(255, 255, 255, 0.06);
+	--glass-thin-border: rgba(255, 255, 255, 0.10);
+	--blur-thin: 8px;
 	--text: rgba(255, 255, 255, 0.92);
 	--muted: rgba(255, 255, 255, 0.7);
 	--shadow: rgba(0, 0, 0, 0.35);
@@ -23,6 +26,8 @@
 	:root {
 		--glass-bg: rgba(255, 255, 255, 0.5);
 		--glass-border: rgba(255, 255, 255, 0.62);
+		--glass-thin-bg: rgba(255, 255, 255, 0.22);
+		--glass-thin-border: rgba(255, 255, 255, 0.38);
 		--text: rgba(0, 0, 0, 0.82);
 		--muted: rgba(0, 0, 0, 0.62);
 		--shadow: rgba(0, 0, 0, 0.18);
@@ -147,6 +152,7 @@ main {
 
 .interlude {
 	margin: 0;
+	padding: var(--vr-4) var(--vr-5);
 	font-size: clamp(13px, 1.8vw, 16px);
 	font-variation-settings: "wght" 400, "CASL" 0.6, "CRSV" 0.9, "MONO" 0;
 	color: var(--muted);
@@ -155,6 +161,11 @@ main {
 	line-height: var(--φ);
 	text-align: center;
 	scroll-snap-align: center;
+	background: var(--glass-thin-bg);
+	border: 1px solid var(--glass-thin-border);
+	backdrop-filter: blur(var(--blur-thin));
+	-webkit-backdrop-filter: blur(var(--blur-thin));
+	border-radius: 12px;
 }
 
 .rule {
