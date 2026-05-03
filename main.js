@@ -57,8 +57,8 @@ function setMarqueeDuration(marqueeEl) {
 	const set = marqueeEl.querySelector('.marquee__set');
 	if (!set) return;
 	const px = set.getBoundingClientRect().width;
-	// ~80px/sec baseline
-	const seconds = Math.max(30.9, Math.min(61.8, px / 30.9));
+	// ~16px/sec baseline — slow drift
+	const seconds = Math.max(60, Math.min(120, px / 16));
 	marqueeEl.style.setProperty('--duration', `${seconds}s`);
 }
 
@@ -74,3 +74,24 @@ window.addEventListener('resize', () => {
 		setMarqueeDuration(marquee);
 	}
 });
+
+// Firmament — random image, right size for the screen
+const bgCount = 9;
+const bg = document.querySelector('.bg');
+if (bg) {
+	const n = Math.floor(Math.random() * bgCount) + 1;
+	const physicalW = window.innerWidth * (window.devicePixelRatio || 1);
+	const size = physicalW <= 1300 ? 'sm' : physicalW <= 2200 ? 'md' : 'lg';
+	bg.style.backgroundImage = `url('./assets/bg/bg-${n}-${size}.webp')`;
+}
+
+function updateParallax() {
+	const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+	if (!bg || maxScroll <= 0) return;
+	const fraction = window.scrollY / maxScroll;
+	bg.style.backgroundPositionY = `${fraction * 100}%`;
+}
+
+window.addEventListener('scroll', updateParallax, { passive: true });
+window.addEventListener('resize', updateParallax);
+updateParallax();
