@@ -132,8 +132,13 @@
             <section class="constellation" aria-label="Projects">
 
                 <div class="project">
-                    <figure class="project__shot">
-                        <img src="./assets/shots/ouracle-app.webp" alt="Ouracle app screenshot" loading="lazy" />
+                    <figure class="project__shot project__shot--wide">
+                        <video
+                            data-src="./assets/shots/ouracle.mp4"
+                            poster="./assets/shots/ouracle-poster.webp"
+                            autoplay loop muted playsinline
+                            preload="none"
+                        ></video>
                     </figure>
                     <div class="glass project__card">
                         <a href="https://ouracle.kerry.ink" class="project__name">Ouracle</a>
@@ -151,6 +156,8 @@
                     </div>
                 </div>
 
+                <h3 class="interlude">play all ways</h3>
+
                 <div class="project">
                     <figure class="project__shot">
                         <img src="./assets/shots/vesta-teaser.webp" alt="Vesta app screenshot" loading="lazy" />
@@ -161,11 +168,14 @@
                     </div>
                 </div>
 
-                <p class="interlude">Play all ways, hold well less,<br>head go south to belly,<br>say say say yes</p>
-
                 <div class="project">
-                    <figure class="project__shot">
-                        <img src="./assets/shots/levelout.webp" alt="LevelOut app screenshot" loading="lazy" />
+                    <figure class="project__shot project__shot--wide">
+                        <video
+                            data-src="./assets/shots/levelout.mp4"
+                            poster="./assets/shots/levelout.webp"
+                            autoplay loop muted playsinline
+                            preload="none"
+                        ></video>
                     </figure>
                     <div class="glass project__card">
                         <a href="https://level.out.kerry.ink" class="project__name">LevelOut</a>
@@ -173,8 +183,17 @@
                     </div>
                 </div>
 
+                <h3 class="interlude">hold well less</h3>
+
                 <div class="project">
-                    <figure class="project__shot"></figure>
+                    <figure class="project__shot project__shot--wide">
+                        <video
+                            data-src="./assets/shots/orfx.mp4"
+                            poster="./assets/shots/orfx-poster.webp"
+                            autoplay loop muted playsinline
+                            preload="none"
+                        ></video>
+                    </figure>
                     <div class="glass project__card">
                         <a href="https://orfx.kerry.ink" class="project__name">orfx</a>
                         <p class="project__desc"></p>
@@ -190,6 +209,8 @@
                         <p class="project__desc"></p>
                     </div>
                 </div>
+
+                <h3 class="interlude">head south to belly</h3>
 
                 <div class="project">
                     <figure class="project__shot">
@@ -211,8 +232,14 @@
                     </div>
                 </div>
 
+                <h3 class="interlude">say say say yes</h3>
+
             </section>
         </main>
+
+        <dialog class="lightbox" id="lightbox" aria-label="Full image">
+            <div class="lightbox__media"></div>
+        </dialog>
 
         <a class="attr" href="https://www.recursive.design" target="_blank" rel="noopener">Recursive</a>
 

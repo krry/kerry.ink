@@ -172,3 +172,60 @@ function setupHeadlineMorph() {
 }
 
 setupHeadlineMorph();
+
+// Lazy-load videos — promote data-src → src on viewport entry
+const lazyVideos = document.querySelectorAll('video[data-src]');
+if (lazyVideos.length) {
+	const videoObserver = new IntersectionObserver((entries, obs) => {
+		entries.forEach(entry => {
+			if (!entry.isIntersecting) return;
+			const video = entry.target;
+			video.src = video.dataset.src;
+			video.load();
+			obs.unobserve(video);
+		});
+	}, { rootMargin: '200px' });
+
+	lazyVideos.forEach(v => videoObserver.observe(v));
+}
+
+// Lightbox — tap project shot to expand full image
+const lightbox = document.getElementById('lightbox');
+const lightboxMedia = lightbox?.querySelector('.lightbox__media');
+
+function openLightbox(figure) {
+	const source = figure.querySelector('img, video');
+	if (!source || !lightboxMedia) return;
+
+	let media;
+	if (source.tagName === 'VIDEO') {
+		media = document.createElement('video');
+		media.src = source.src || source.dataset.src;
+		media.autoplay = true;
+		media.loop = true;
+		media.muted = true;
+		media.playsInline = true;
+	} else {
+		media = document.createElement('img');
+		media.src = source.src;
+		media.alt = source.alt;
+	}
+	lightboxMedia.replaceChildren(media);
+	lightbox.showModal();
+}
+
+function closeLightbox() {
+	lightbox.close();
+}
+
+document.querySelectorAll('.project__shot').forEach(figure => {
+	figure.addEventListener('click', () => openLightbox(figure));
+});
+
+lightbox?.addEventListener('click', e => {
+	if (e.target === lightbox) closeLightbox();
+});
+
+lightbox?.addEventListener('close', () => {
+	lightboxMedia.replaceChildren();
+});
