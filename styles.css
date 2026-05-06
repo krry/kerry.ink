@@ -157,6 +157,7 @@ main {
 	letter-spacing: 0.02em;
 	line-height: var(--φ);
 	text-align: center;
+	max-width: 40ch;
 	scroll-snap-align: center;
 	background: var(--glass-thin-bg);
 	border: 1px solid var(--glass-thin-border);
