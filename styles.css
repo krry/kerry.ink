@@ -328,6 +328,15 @@ main {
 	overflow-y: auto;
 }
 
+.gratitude {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.618em;
+	padding: 25vh var(--vr-5) 40vh;
+	overflow-y: auto;
+}
+
 .project {
 	display: flex;
 	flex-direction: column;
@@ -454,16 +463,11 @@ main {
 /* --- attribution --- */
 
 .attr {
-	position: fixed;
-	bottom: 10px;
-	right: 14px;
-	z-index: 1;
-	font-size: 10px;
-	font-variation-settings: "wght" 340, "CASL" 0, "CRSV" 0, "MONO" 0;
+	margin: 0.5rem;
+	font-variation-settings: "wght" 840, "CASL" 1, "CRSV" 1, "MONO" 0;
 	letter-spacing: 0.08em;
-	text-transform: uppercase;
 	color: var(--muted);
-	opacity: 0.45;
+	opacity: 0.65;
 	text-decoration: none;
 	transition: opacity 120ms ease;
 }
