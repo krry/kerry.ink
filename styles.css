@@ -432,6 +432,7 @@ main {
 	line-height: var(--φ);
 	text-align: justify;
 	hyphens: auto;
+	display: none;
 }
 
 /* --- lightbox --- */
