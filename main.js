@@ -229,3 +229,9 @@ lightbox?.addEventListener('click', e => {
 lightbox?.addEventListener('close', () => {
 	lightboxMedia.replaceChildren();
 });
+
+// When the DOM is ready, set the year text
+document.addEventListener('DOMContentLoaded', function () {
+  // new Date().getFullYear() is supported basically everywhere
+  document.getElementById('year').textContent = new Date().getFullYear();
+});

@@ -335,6 +335,12 @@ main {
 	gap: 0.618em;
 	padding: 25vh var(--vr-5) 40vh;
 	overflow-y: auto;
+	.attr {
+		opacity: 0.8;
+	}
+	a.attr:hover {
+		text-decoration: underline;
+	}
 }
 
 .project {
@@ -419,6 +425,15 @@ main {
 	display: none;
 }
 
+.project_date {
+	font-size: clamp(10px, 1.4vw, 14px);
+	font-variation-settings: "wght" 320, "CASL" 0.2, "CRSV" 0, "MONO" 0;
+	color: var(--muted);
+	line-height: var(--φ);
+	text-align: justify;
+	hyphens: auto;
+}
+
 /* --- lightbox --- */
 
 .lightbox {
@@ -488,6 +503,18 @@ main {
 	clip: rect(0, 0, 0, 0);
 	white-space: nowrap;
 	border: 0;
+}
+
+footer {
+	text-align: center;
+	padding: 1rem;
+	font-size: 0.8rem;
+	opacity: 0.8;
+}
+
+.flipX {
+	display: inline-block;
+	transform: rotate(180deg);	
 }
 
 @media (max-width: 520px) {
