@@ -8,8 +8,12 @@
 	--text: rgba(255, 255, 255, 0.92);
 	--muted: rgba(255, 255, 255, 0.7);
 	--shadow: rgba(0, 0, 0, 0.35);
+	--accent: rgba(255, 255, 255, 1);
 	--blur: 18px;
 	--duration: 28s;
+	--transition: 0.236s;
+	--rec: Recursive, ui-sans-serif, system-ui, -apple-system,
+		BlinkMacSystemFont, "Segoe UI", sans-serif;
 
 	/* golden ratio vertical rhythm */
 	--φ: 1.618;           /* unitless — for line-height, ratios */
@@ -40,12 +44,12 @@
 
 html {
 	scroll-behavior: smooth;
+	overflow-x: hidden;
 }
 
 body {
 	margin: 0;
-	font-family: Recursive, ui-sans-serif, system-ui, -apple-system,
-		BlinkMacSystemFont, "Segoe UI", sans-serif;
+	font-family: var(--rec);
 	font-variation-settings: "wght" 618, "CASL" 0.618, "CRSV" 0.618, "MONO" 0.1618;
 	color: var(--text);
 	background: #000;
@@ -133,37 +137,64 @@ main {
 .links {
 	width: calc(100vw + 2rem);
 	border-radius: 18px;
-	padding: var(--vr-5) var(--vr-5) var(--vr-3);
+	padding: var(--vr-4) var(--vr-5) var(--vr-3);
 	text-align: center;
+}
+
+
+.fleur {
+	border: 0;
+	background: none;
+	margin: var(--vr-7) auto;
+	text-align: center;
+	position: relative;
+}
+
+.fleur:after {
+	content: "⚜";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
 }
 
 /* --- hero type --- */
 
 .headline {
-	margin: 0.618rem auto 0.1618em;
+	margin: var(--vr-6) auto var(--vr-6);
 	font-size: clamp(28px, 4.8vw, 58px);
 	font-variation-settings: "wght" 900, "CASL" 1, "CRSV" 1, "MONO" 0;
 	letter-spacing: -0.03em;
 	line-height: var(--φ);
+	cursor: default;
 }
 
 .interlude {
 	margin: 0;
 	padding: var(--vr-4) var(--vr-5);
-	font-size: clamp(16px, 2.2vw, 21px);
-	font-variation-settings: "wght" 400, "CASL" 0.6, "CRSV" 0.9, "MONO" 0;
+	font-size: clamp(20px, 2.7vw, 27px);
+	font-variation-settings: "wght" 800, "CASL" 1, "CRSV" 1, "MONO" 0;
 	color: var(--muted);
-	font-style: italic;
-	letter-spacing: 0.02em;
+	letter-spacing: -0.03em;
 	line-height: var(--φ);
 	text-align: center;
-	max-width: 40ch;
+	max-width: 45ch;
 	scroll-snap-align: center;
 	background: var(--glass-thin-bg);
 	border: 1px solid var(--glass-thin-border);
 	backdrop-filter: blur(var(--blur-thin));
 	-webkit-backdrop-filter: blur(var(--blur-thin));
 	border-radius: 12px;
+	transition: all var(--transition) ease-in-out;
+	cursor: default;
+	&:hover, &:focus {
+		color: var(--text);
+		background: var(--glass-bg);
+		border: 1px solid var(--glass-border);
+		backdrop-filter: blur(var(--blur));
+		-webkit-backdrop-filter: blur(var(--blur));
+	}
 }
 
 .rule {
@@ -213,7 +244,6 @@ main {
 	align-items: center;
 	gap: var(--vr-3);
 	padding-right: var(--vr-3);
-	margin-top: var(--vr-3);
 }
 
 @keyframes marquee-left {
@@ -239,12 +269,13 @@ main {
 /* epithet marquee */
 
 .epithet {
-	margin-top: var(--vr-3);
+	margin: var(--vr-3) 0 var(--vr-4);
 	color: var(--muted);
-	font-size: clamp(14px, 2.1vw, 18px);
+	font-size: clamp(12px, 1.8vw, 16px);
 	min-height: 1.3em;
 	user-select: none;
 	cursor: default;
+	opacity: 0.8;
 }
 
 .epithet__item {
@@ -289,7 +320,7 @@ main {
 }
 
 .links__track a:hover {
-	transform: translateY(-1px);
+	transform: scale(0.95);
 	background: rgba(255, 255, 255, 0.08);
 	border-color: rgba(255, 255, 255, 0.18);
 }
@@ -332,14 +363,23 @@ main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 0.618em;
+	gap: 1rem;
 	padding: 25vh var(--vr-5) 40vh;
 	overflow-y: auto;
+	ul {
+		margin: 0;
+	}
 	.attr {
 		opacity: 0.8;
 	}
 	a.attr:hover {
 		text-decoration: underline;
+	}
+	.thank-you {
+		opacity: 1;
+		font-size: 1.2em;
+		margin-top: 2rem;
+		margin-left: -1em;
 	}
 }
 
@@ -425,7 +465,7 @@ main {
 	display: none;
 }
 
-.project_date {
+.project__date {
 	font-size: clamp(10px, 1.4vw, 14px);
 	font-variation-settings: "wght" 320, "CASL" 0.2, "CRSV" 0, "MONO" 0;
 	color: var(--muted);
@@ -476,10 +516,101 @@ main {
 	cursor: zoom-in;
 }
 
+/* --- ribbon banner --- */
+
+.ribbon {
+	position: absolute;
+	background: var(--glass-bg);
+	border-top: 1px solid var(--glass-border);
+	border-bottom: 1px solid var(--glass-border);
+	text-align: center;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  padding: var(--vr-4) var(--vr-5) var(--vr-5);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  z-index: 3;
+	h2 {
+		font-size: clamp(1rem, 3.326vw, 2rem);
+		font-variation-settings: 'wght' 777, 'CRSV' 1, 'CASL' 0.5;
+		text-transform: uppercase;
+		letter-spacing: 0.0618ch;
+		margin: var(--vr-3) auto var(--vr-2);
+		cursor: default;
+	}
+	.ribbon__text {
+		margin: var(--vr-3) auto var(--vr-2);
+		font-variation-settings: 'wght' 400, 'CRSV' 0.5, 'CASL' 0.5;
+	}
+	.ribbon__subtext {
+		opacity: 0.7;
+		font-size: clamp(10px, 1.5vw, 16px);
+		margin: var(--vr-2);
+	}
+	.ribbon__link {
+		color: var(--muted);
+	}
+	.ribbon__link:hover, .ribbon__link:focus {
+		color: var(--accent);
+	}
+}
+
+/* --- email form --- */
+
+.email-form {
+	margin: 1rem auto;
+	h2 {
+		text-align: center;
+	}
+}
+
+.email-input, .email-note, .email-submit {
+	display: block;
+	font-family: var(--rec);
+	margin: var(--vr-2) auto var(--vr-4);
+	padding: var(--vr-2) var(--vr-3);
+	color: var(--text);
+	font-size: clamp(16px, 2.4vw, 20px);
+	font-variation-settings: "wght" 370, "CASL" 0, "CRSV" 0, "MONO" 1;
+	line-height: var(--φ);
+	min-width: 24ch;
+	background: var(--glass-bg);
+	border: 1px solid var(--glass-border);
+	backdrop-filter: blur(var(--blur-thin));
+	-webkit-backdrop-filter: blur(var(--blur-thin));
+	border-radius: 12px;
+	&::placeholder {
+		color: var(--muted);
+	}
+}
+
+.email-label {
+	display: block;
+	color: var(--muted);
+	font-size: clamp(10px, 2vw, 14px);
+	font-variation-settings: "wght" 400, "CASL" 0.5, "CSRV" 0, "MONO" 0.5;
+	margin-left: 1ch;
+}
+
+.email-submit {
+	background-color: var(--glass-bg);
+	border: 1px solid var(--glass-border);
+	font-variation-settings: "wght" 560;
+	cursor: pointer;
+	transition: background-color 326ms ease;
+	font-variation-settings: "wght" 700, "CASL" 1, "CRSV" 1, "MONO" 0;
+	letter-spacing: -0.01em;
+	&:hover {
+		background-color: hsla(127, 100%, 62%, 0.618);
+	}
+}
+
 /* --- attribution --- */
 
 .attr {
-	margin: 0.5rem;
 	font-variation-settings: "wght" 840, "CASL" 1, "CRSV" 1, "MONO" 0;
 	letter-spacing: 0.08em;
 	color: var(--muted);

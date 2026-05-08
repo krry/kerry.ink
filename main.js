@@ -116,30 +116,36 @@ const DERIVATIONS = [
 
 const BASE_FVS = '"wght" 900, "CASL" 1, "CRSV" 1, "MONO" 0';
 
-function setupHeadlineMorph() {
+function setupMorph(selector) {
 	if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-	const headline = document.querySelector('.headline');
-	if (!headline) return;
-
-	const text = headline.textContent;
-	headline.textContent = '';
+	const el = document.querySelector(selector);
+	if (!el) return;
 
 	const spans = [];
-	for (let i = 0; i < text.length; i++) {
-		const ch = text[i];
-		if (ch === ' ') {
-			headline.appendChild(document.createTextNode(' '));
-			spans.push(null);
-		} else {
-			const s = document.createElement('span');
-			s.className = 'hl';
-			s.textContent = ch;
-			// each letter gets a derivation, cycling through the list
-			s.dataset.fvs = DERIVATIONS[i % DERIVATIONS.length];
-			headline.appendChild(s);
-			spans.push(s);
-		}
+	const nodes = Array.from(el.childNodes);
+	el.textContent = '';
+
+	for (const node of nodes) {
+	  if (node.nodeType === Node.TEXT_NODE) {
+	    // existing letter-span logic, but over node.textContent
+	    for (const ch of node.textContent) {
+	      if (ch === ' ') {
+	        el.appendChild(document.createTextNode(' '));
+	        spans.push(null);
+	      } else {
+	        const s = document.createElement('span');
+	        s.className = 'hl';
+	        s.textContent = ch;
+	        s.dataset.fvs = DERIVATIONS[spans.length % DERIVATIONS.length];
+	        el.appendChild(s);
+	        spans.push(s);
+	      }
+	    }
+	  } else if (node.nodeName === 'BR') {
+	    el.appendChild(document.createElement('br'));
+	    spans.push(null); // null = skip in ripple, same as space
+	  }
 	}
 
 	function applyRipple(idx) {
@@ -166,12 +172,23 @@ function setupHeadlineMorph() {
 	spans.forEach((s, i) => {
 		if (!s) return;
 		s.addEventListener('mouseenter', () => applyRipple(i));
+
+		// make touch interactive as well
+		s.addEventListener('touchstart', (e) => {
+		  e.preventDefault(); // stops the synthetic mouse events from also firing
+		  applyRipple(i);
+		}, { passive: false });
 	});
 
-	headline.addEventListener('mouseleave', resetAll);
+	el.addEventListener('mouseleave', resetAll);
+	el.addEventListener('touchend', resetAll);
 }
 
-setupHeadlineMorph();
+setupMorph('.headline');
+setupMorph('.ribbon__title');
+document.querySelectorAll('.interlude').forEach((_, i) => {
+  setupMorph(`.interlude:nth-of-type(${i + 1})`);
+});
 
 // Lazy-load videos — promote data-src → src on viewport entry
 const lazyVideos = document.querySelectorAll('video[data-src]');
@@ -234,4 +251,13 @@ lightbox?.addEventListener('close', () => {
 document.addEventListener('DOMContentLoaded', function () {
   // new Date().getFullYear() is supported basically everywhere
   document.getElementById('year').textContent = new Date().getFullYear();
+});
+
+document.querySelector('#subscribe').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = e.target.email.value;
+  await fetch('/api/subscribe', {
+    method: 'POST',
+    body: JSON.stringify({ email }),
+  });
 });

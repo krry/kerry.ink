@@ -20,12 +20,17 @@
     <body>
         <div class="bg" aria-hidden="true"></div>
         <div class="vignette" aria-hidden="true"></div>
-
+        <div class="ribbon">
+            <h2 class="ribbon__title">Grand reopening</h2>
+            <p class="ribbon__subtext">Consulting&nbsp;&nbsp❖&nbsp;&nbsp;Coaching&nbsp;&nbsp❖&nbsp;&nbsp;Development</p>
+            <p class="ribbon__text">Now accepting select clients for 2026</p>
+            <p class="ribbon__text"><a class="ribbon__link" href="mailto:hello@kerry.ink">hello@kerry.ink</a></p>
+        </div>
         <a class="name" href="/" aria-label="Kerry Alan Snyder">Kerry Alan Snyder</a>
 
         <main>
             <!-- First screen: marquee + headline + currently + links -->
-            <section class="hero" aria-label="Kerry Alan Snyder">
+            <section class="hero" aria-label="marquee with headline and links">
                 <nav class="glass links" aria-label="Links">
                     <div
                         class="marquee marquee--right epithet"
@@ -43,6 +48,7 @@
                     <div class="marquee marquee--left" aria-label="Link marquee">
                         <div class="marquee__track links__track" id="linksTrack">
                             <div class="marquee__set">
+                                <a href="./assets/resume-kerry-alan-snyder-2026.pdf">Résumé</a>
                                 <a href="https://level.out.kerry.ink">LevelOut</a>
                                 <a href="https://suno.com/playlist/f63b96cf-43c5-4e42-aacb-23cbfd1e6b28">97.5 KRRY</a>
                                 <a
@@ -268,13 +274,43 @@
 
             </section>
             <section class="gratitude">
-                <a class="attr" href="https://www.recursive.design" target="_blank" rel="noopener">Thx, Recursive</a>
-                <a class="attr" href="https://freesound.org" target="_blank" rel="noopener">Thx, Freesound</a>
-                <a class="attr" href="https://vercel.com" target="_blank" rel="noopener">Thx, Vercel</a>
-                <a class="attr" href="https://anthropic.com" target="_blank" rel="noopener">Thx, Claude</a>
-                <a class="attr" href="https://suno.com" target="_blank" rel="noopener">Thx, Suno</a>
-                <a class="attr" href="https://diabrowser.com" target="_blank" rel="noopener">Thx, Dia</a>
-                <p class="attr">And most of all, thank you!</a>
+                <h2>Thanks to…</h2>
+                <ul>
+                    <li>
+                        <a class="attr" href="https://www.recursive.design" target="_blank" rel="noopener">Recursive</a>
+                        <span>for the typeface</span>
+                    </li>
+                    <li>
+                        <a class="attr" href="https://freesound.org" target="_blank" rel="noopener">Freesound</a>
+                        <span>for the ambiance</span>
+                    </li>
+                    <li>
+                    <a class="attr" href="https://vercel.com" target="_blank" rel="noopener">Vercel</a>
+                        <span>for the easy deploys</span>
+                    </li>
+                    <li>
+                    <a class="attr" href="https://anthropic.com" target="_blank" rel="noopener">Claude</a>
+                        <span>for finishing my sandwiches</span>
+                    </li>
+                    <li>
+                    <a class="attr" href="https://suno.com" target="_blank" rel="noopener">Suno</a>
+                        <span>for the orchestra</span>
+                    </li>
+                    <li>
+                    <a class="attr" href="https://diabrowser.com" target="_blank" rel="noopener">Dia</a>
+                        <span>for delightful browsing</span>
+                    </li>
+                    <p class="attr thank-you">And most of all, thank you!</a>
+                </ul>
+                <hr class="fleur" />
+                <form id="subscribe" class="email-form">
+                    <h2>Let's connect</h2>
+                    <label for="email" class="email-label">Email</label>
+                    <input type="email" name="email" placeholder="your@email.net" required id="email" class="email-input" autocomplete="email">
+                    <label for="note-input" class="email-label">Note</label>
+                    <textarea name="note" id="note-input" class="email-note" rows="3" placeholder="What's up, doc?"></textarea>
+                    <button type="submit" class="email-submit">Send</button>
+                </form>
             </section>
         </main>
         <footer>
