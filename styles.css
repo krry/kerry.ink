@@ -49,6 +49,7 @@ html {
 
 body {
 	margin: 0;
+	overflow-x: hidden;
 	font-family: var(--rec);
 	font-variation-settings: "wght" 618, "CASL" 0.618, "CRSV" 0.618, "MONO" 0.1618;
 	color: var(--text);
@@ -173,10 +174,10 @@ main {
 .interlude {
 	margin: 0;
 	padding: var(--vr-4) var(--vr-5);
-	font-size: clamp(20px, 2.7vw, 27px);
+	font-size: clamp(15px, 2.7vw, 27px);
 	font-variation-settings: "wght" 800, "CASL" 1, "CRSV" 1, "MONO" 0;
 	color: var(--muted);
-	letter-spacing: -0.03em;
+	letter-spacing: -0.02em;
 	line-height: var(--φ);
 	text-align: center;
 	max-width: 45ch;
@@ -262,9 +263,6 @@ main {
 	}
 }
 
-.marquee:hover .marquee__track {
-	animation-play-state: paused;
-}
 
 /* epithet marquee */
 
@@ -647,6 +645,13 @@ footer {
 .flipX {
 	display: inline-block;
 	transform: rotate(180deg);	
+}
+
+/* hide ribbon in landscape on phones (height ≤ typical phone width) */
+@media (max-height: 430px) {
+	.ribbon {
+		display: none;
+	}
 }
 
 @media (max-width: 520px) {

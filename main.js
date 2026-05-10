@@ -62,11 +62,113 @@ function setMarqueeDuration(marqueeEl) {
 	marqueeEl.style.setProperty('--duration', `${seconds}s`);
 }
 
+function setupMarqueeInteraction(marqueeEl) {
+	const track = marqueeEl.querySelector('.marquee__track');
+	if (!track) return;
+
+	const isRight = marqueeEl.classList.contains('marquee--right');
+	let dragging = false;
+	let startX = 0;
+	let startTranslateX = 0;
+	let currentDragX = 0;
+	let cachedSetWidth = 0;
+	let rafId = null;
+	const history = [];
+
+	marqueeEl.style.touchAction = 'pan-y';
+	marqueeEl.style.cursor = 'grab';
+
+	function getSetWidth() {
+		const set = track.querySelector('.marquee__set');
+		return set ? set.getBoundingClientRect().width : 0;
+	}
+
+	function getDuration() {
+		return parseFloat(getComputedStyle(marqueeEl).getPropertyValue('--duration')) || 60;
+	}
+
+	function normalizeX(x, setWidth) {
+		let n = x % setWidth;
+		if (n > 0) n -= setWidth;
+		return n;
+	}
+
+	function resumeFrom(x) {
+		const sw = getSetWidth();
+		const dur = getDuration();
+		if (!sw) return;
+		const norm = normalizeX(x, sw);
+		const progress = isRight ? (norm + sw) / sw : -norm / sw;
+		track.style.transform = '';
+		track.style.animationDelay = `${-progress * dur}s`;
+		track.style.animationPlayState = '';
+		track.style.animationName = '';
+	}
+
+	function applyInertia(velocity) {
+		const FRICTION = 0.93;
+		function step() {
+			velocity *= FRICTION;
+			if (Math.abs(velocity) < 0.5) { resumeFrom(currentDragX); rafId = null; return; }
+			currentDragX = normalizeX(currentDragX + velocity, cachedSetWidth);
+			track.style.transform = `translateX(${currentDragX}px)`;
+			rafId = requestAnimationFrame(step);
+		}
+		rafId = requestAnimationFrame(step);
+	}
+
+	function onStart(clientX, timestamp) {
+		if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+		cachedSetWidth = getSetWidth();
+		const matrix = new DOMMatrix(getComputedStyle(track).transform);
+		startTranslateX = normalizeX(matrix.m41, cachedSetWidth);
+		currentDragX = startTranslateX;
+		startX = clientX;
+		history.length = 0;
+		history.push({ x: clientX, t: timestamp });
+		track.style.animationName = 'none';
+		track.style.transform = `translateX(${startTranslateX}px)`;
+		dragging = true;
+	}
+
+	function onMove(clientX, timestamp) {
+		if (!dragging) return;
+		currentDragX = normalizeX(startTranslateX + (clientX - startX), cachedSetWidth);
+		track.style.transform = `translateX(${currentDragX}px)`;
+		history.push({ x: clientX, t: timestamp });
+		while (history.length > 1 && timestamp - history[0].t > 100) history.shift();
+	}
+
+	function onEnd() {
+		if (!dragging) return;
+		dragging = false;
+		let velocity = 0;
+		if (history.length >= 2) {
+			const a = history[0], b = history[history.length - 1];
+			const dt = b.t - a.t;
+			if (dt > 0) velocity = (b.x - a.x) / dt * (1000 / 60);
+		}
+		Math.abs(velocity) > 0.5 ? applyInertia(velocity) : resumeFrom(currentDragX);
+	}
+
+	// Touch
+	track.addEventListener('touchstart',  (e) => onStart(e.touches[0].clientX, e.timeStamp), { passive: true });
+	track.addEventListener('touchmove',   (e) => onMove(e.touches[0].clientX, e.timeStamp), { passive: true });
+	track.addEventListener('touchend',    onEnd);
+	track.addEventListener('touchcancel', () => { dragging = false; if (rafId) { cancelAnimationFrame(rafId); rafId = null; } resumeFrom(currentDragX); });
+
+	// Mouse
+	marqueeEl.addEventListener('mousedown', (e) => { e.preventDefault(); onStart(e.clientX, e.timeStamp); marqueeEl.style.cursor = 'grabbing'; });
+	document.addEventListener('mousemove',  (e) => onMove(e.clientX, e.timeStamp));
+	document.addEventListener('mouseup',    () => { if (dragging) { marqueeEl.style.cursor = 'grab'; onEnd(); } });
+}
+
 buildEpithetMarquee();
 duplicateFirstSet('linksTrack');
 
 for (const marquee of document.querySelectorAll('.marquee')) {
 	setMarqueeDuration(marquee);
+	setupMarqueeInteraction(marquee);
 }
 
 window.addEventListener('resize', () => {
