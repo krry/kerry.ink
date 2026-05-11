@@ -178,7 +178,7 @@ window.addEventListener('resize', () => {
 });
 
 // Firmament — random image, right size for the screen
-const bgCount = 9;
+const bgCount = 13;
 const bg = document.querySelector('.bg');
 if (bg) {
 	const n = Math.floor(Math.random() * bgCount) + 1;
@@ -301,9 +301,10 @@ if (lazyVideos.length) {
 			const video = entry.target;
 			video.src = video.dataset.src;
 			video.load();
+			video.play().catch(() => {});
 			obs.unobserve(video);
 		});
-	}, { rootMargin: '200px' });
+	}, { rootMargin: '400px' });
 
 	lazyVideos.forEach(v => videoObserver.observe(v));
 }

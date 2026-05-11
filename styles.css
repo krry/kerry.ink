@@ -4,12 +4,12 @@
 	--glass-border: rgba(255, 255, 255, 0.28);
 	--glass-thin-bg: rgba(255, 255, 255, 0.18);
 	--glass-thin-border: rgba(255, 255, 255, 0.28);
-	--blur-thin: 12px;
+	--blur-thin: 8px;
 	--text: rgba(255, 255, 255, 0.92);
 	--muted: rgba(255, 255, 255, 0.7);
 	--shadow: rgba(0, 0, 0, 0.35);
 	--accent: rgba(255, 255, 255, 1);
-	--blur: 18px;
+	--blur: 12px;
 	--duration: 28s;
 	--transition: 0.236s;
 	--rec: Recursive, ui-sans-serif, system-ui, -apple-system,
@@ -64,7 +64,7 @@ body {
 	background-size: 100% auto;
 	background-repeat: no-repeat;
 	background-position: center top;
-	filter: blur(18px) saturate(1.1) contrast(1.05);
+	filter: blur(var(--blur)) saturate(1.1) contrast(1.05);
 	transform: scale(1.06);
 	z-index: -2;
 }
@@ -485,8 +485,8 @@ main {
 
 .lightbox::backdrop {
 	background: rgba(0, 0, 0, 0.72);
-	backdrop-filter: blur(12px);
-	-webkit-backdrop-filter: blur(12px);
+	backdrop-filter: blur(var(--blur-thin));
+	-webkit-backdrop-filter: blur(var(--blur-thin));
 }
 
 .lightbox[open] {
