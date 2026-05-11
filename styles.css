@@ -2,9 +2,9 @@
 	/* glass */
 	--glass-bg: rgba(255, 255, 255, 0.14);
 	--glass-border: rgba(255, 255, 255, 0.28);
-	--glass-thin-bg: rgba(255, 255, 255, 0.06);
-	--glass-thin-border: rgba(255, 255, 255, 0.10);
-	--blur-thin: 8px;
+	--glass-thin-bg: rgba(255, 255, 255, 0.18);
+	--glass-thin-border: rgba(255, 255, 255, 0.28);
+	--blur-thin: 12px;
 	--text: rgba(255, 255, 255, 0.92);
 	--muted: rgba(255, 255, 255, 0.7);
 	--shadow: rgba(0, 0, 0, 0.35);
@@ -135,6 +135,14 @@ main {
 	box-shadow: 0 24px 80px var(--shadow);
 }
 
+.glass-thin {
+	background: var(--glass-thin-bg);
+	border: 1px solid var(--glass-thin-border);
+	backdrop-filter: blur(var(--blur-thin));
+	-webkit-backdrop-filter: blur(var(--blur-thin));
+	border-radius: 16px;
+}
+
 .links {
 	width: calc(100vw + 2rem);
 	border-radius: 18px;
@@ -206,11 +214,6 @@ main {
 	margin: var(--vr-3) 0;
 }
 
-@media (prefers-color-scheme: light) {
-	.rule {
-		background: rgba(0, 0, 0, 0.12);
-	}
-}
 
 /* --- marquees --- */
 
@@ -323,12 +326,6 @@ main {
 	border-color: rgba(255, 255, 255, 0.18);
 }
 
-@media (prefers-color-scheme: light) {
-	.links__track a:hover {
-		background: rgba(255, 255, 255, 0.5);
-		border-color: rgba(0, 0, 0, 0.08);
-	}
-}
 
 /* --- headline letter morph --- */
 
@@ -364,6 +361,12 @@ main {
 	gap: 1rem;
 	padding: 25vh var(--vr-5) 40vh;
 	overflow-y: auto;
+}
+
+.gratitude__card {
+	padding: var(--vr-5) var(--vr-6);
+	width: 100%;
+	max-width: 480px;
 	ul {
 		margin: 0;
 	}
@@ -443,11 +446,6 @@ main {
 	opacity: 0.72;
 }
 
-@media (prefers-color-scheme: light) {
-	.project__name {
-		border-bottom-color: rgba(0, 0, 0, 0.15);
-	}
-}
 
 .project__desc {
 	margin: 0;
@@ -605,6 +603,7 @@ main {
 		background-color: hsla(127, 100%, 62%, 0.618);
 	}
 }
+
 
 /* --- attribution --- */
 
