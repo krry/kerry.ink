@@ -271,19 +271,14 @@ function setupMorph(selector) {
 		spans.forEach(s => { if (s) s.style.fontVariationSettings = ''; });
 	}
 
-	spans.forEach((s, i) => {
-		if (!s) return;
-		s.addEventListener('mouseenter', () => applyRipple(i));
-
-		// make touch interactive as well
-		s.addEventListener('touchstart', (e) => {
-		  e.preventDefault(); // stops the synthetic mouse events from also firing
-		  applyRipple(i);
-		}, { passive: false });
+	el.addEventListener('pointerover', (e) => {
+		const target = e.target.closest('.hl');
+		if (!target) return;
+		const idx = spans.indexOf(target);
+		if (idx !== -1) applyRipple(idx);
 	});
 
-	el.addEventListener('mouseleave', resetAll);
-	el.addEventListener('touchend', resetAll);
+	el.addEventListener('pointerleave', resetAll);
 }
 
 setupMorph('.headline');
@@ -363,4 +358,34 @@ document.querySelector('#subscribe').addEventListener('submit', async (e) => {
     method: 'POST',
     body: JSON.stringify({ email }),
   });
+});
+
+document.querySelector('#betaForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('.beta-signup__btn');
+  const status = form.querySelector('.beta-signup__status');
+  const email = form.email.value.trim();
+  const name = form.name.value.trim();
+  const apps = [...form.querySelectorAll('input[name="apps"]:checked')].map(el => el.value);
+
+  btn.disabled = true;
+  status.textContent = 'Sending…';
+
+  try {
+    const res = await fetch('/api/beta', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, name, apps }),
+    });
+    if (res.ok) {
+      status.textContent = '✓ Got it — you\'ll get an invite soon.';
+      form.reset();
+    } else {
+      throw new Error();
+    }
+  } catch {
+    status.textContent = 'Something went wrong. Try emailing hello@kerry.ink directly.';
+    btn.disabled = false;
+  }
 });

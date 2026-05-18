@@ -224,14 +224,50 @@
 
                 <div class="project">
                     <figure class="project__shot">
-                        <img src="./assets/shots/vesta-teaser.webp" alt="Vesta app screenshot" loading="lazy" />
+                        <img src="./assets/shots/vesta-teaser.webp" alt="Feelies app screenshot" loading="lazy" />
                     </figure>
                     <div class="glass project__card">
-                        <a href="https://vesta.kerry.ink" class="project__name">Vesta</a>
+                        <a href="https://feelies.kerry.ink" class="project__name">Feelies</a>
                         <p class="project__desc">sosh is over. feelings are true. every day, you are anew… and weird like us. let's play. (coming soon to iOS)</p>
                         <p class="project__date">Conceived and prototyped in April 2026, in 2 days</p>
                     </div>
                 </div>
+
+                <section class="beta-signup glass" id="beta">
+                    <h3 class="beta-signup__heading">Join the iOS beta</h3>
+                    <p class="beta-signup__sub">TestFlight invites for SVNR and Feelies. Drop your Apple ID email and I'll add you.</p>
+                    <form class="beta-signup__form" id="betaForm">
+                        <div class="beta-signup__checks">
+                            <label class="beta-signup__check">
+                                <input type="checkbox" name="apps" value="SVNR" checked />
+                                <span>SVNR</span>
+                            </label>
+                            <label class="beta-signup__check">
+                                <input type="checkbox" name="apps" value="Feelies" checked />
+                                <span>Feelies</span>
+                            </label>
+                        </div>
+                        <div class="beta-signup__row">
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="name (optional)"
+                                class="beta-signup__input"
+                                autocomplete="name"
+                            />
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Apple ID email"
+                                class="beta-signup__input beta-signup__input--email"
+                                required
+                                autocomplete="email"
+                            />
+                            <button type="submit" class="beta-signup__btn">request invite</button>
+                        </div>
+                        <p class="beta-signup__status" aria-live="polite"></p>
+                    </form>
+                </section>
 
                 <h3 class="interlude">Our mind now expands to the limit <br/>of our willingness to surrender.</h3>
 
