@@ -533,7 +533,7 @@ main {
 	outline: none;
 	transition: border-color 0.15s;
 }
-.beta-signup__input::placeholder { opacity: 0.4; }
+.beta-signup__input::placeholder { color: color-mix(in srgb, var(--text) 38%, transparent); }
 .beta-signup__input:focus { border-color: color-mix(in srgb, var(--accent) 70%, transparent); }
 .beta-signup__input--email { flex: 2; }
 
