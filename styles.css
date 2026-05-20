@@ -656,44 +656,58 @@ main {
 	}
 }
 
-.email-input, .email-note, .email-submit {
+.email-input, .email-note {
 	display: block;
 	font-family: var(--rec);
 	margin: var(--vr-2) auto var(--vr-4);
-	padding: var(--vr-2) var(--vr-3);
+	padding: 0.5rem 0.75rem;
 	color: var(--text);
-	font-size: clamp(16px, 2.4vw, 20px);
-	font-variation-settings: "wght" 370, "CASL" 0, "CRSV" 0, "MONO" 1;
-	line-height: var(--φ);
-	min-width: 24ch;
-	background: var(--glass-bg);
-	border: 1px solid var(--glass-border);
-	backdrop-filter: blur(var(--blur-thin));
-	-webkit-backdrop-filter: blur(var(--blur-thin));
-	border-radius: 12px;
+	font-size: 0.85rem;
+	font-variation-settings: "wght" 400, "CASL" 0.2, "CRSV" 0, "MONO" 0;
+	line-height: 1.5;
+	width: 100%;
+	box-sizing: border-box;
+	background: color-mix(in srgb, var(--text) 6%, transparent);
+	border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+	border-radius: 6px;
+	outline: none;
+	transition: border-color 0.15s;
 	&::placeholder {
-		color: var(--muted);
+		color: color-mix(in srgb, var(--text) 38%, transparent);
 	}
+	&:focus {
+		border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+	}
+}
+
+.email-note {
+	resize: vertical;
 }
 
 .email-label {
 	display: block;
 	color: var(--muted);
 	font-size: clamp(10px, 2vw, 14px);
-	font-variation-settings: "wght" 400, "CASL" 0.5, "CSRV" 0, "MONO" 0.5;
+	font-variation-settings: "wght" 400, "CASL" 0.5, "CRSV" 0, "MONO" 0.5;
 	margin-left: 1ch;
 }
 
 .email-submit {
-	background-color: var(--glass-bg);
-	border: 1px solid var(--glass-border);
-	font-variation-settings: "wght" 560;
+	display: block;
+	font-family: var(--rec);
+	font-size: 0.85rem;
+	font-variation-settings: "wght" 600, "CASL" 0.2, "CRSV" 0, "MONO" 0;
+	padding: 0.5rem 1.1rem;
+	background: color-mix(in srgb, var(--accent) 15%, transparent);
+	border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+	border-radius: 6px;
+	color: var(--text);
 	cursor: pointer;
-	transition: background-color 326ms ease;
-	font-variation-settings: "wght" 700, "CASL" 1, "CRSV" 1, "MONO" 0;
-	letter-spacing: -0.01em;
+	transition: background 0.15s, border-color 0.15s;
+	letter-spacing: 0;
 	&:hover {
-		background-color: hsla(127, 100%, 62%, 0.618);
+		background: color-mix(in srgb, var(--accent) 28%, transparent);
+		border-color: color-mix(in srgb, var(--accent) 65%, transparent);
 	}
 }
 
