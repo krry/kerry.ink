@@ -406,6 +406,7 @@ hr.rule {
 	padding: var(--vr-5) var(--vr-6);
 	width: 100%;
 	max-width: 480px;
+	border-radius: 16px;
 	ul {
 		margin: 0;
 	}
