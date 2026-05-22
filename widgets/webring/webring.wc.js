@@ -144,7 +144,7 @@
         }
 
         .logo-nib {
-          font-size: 3em;
+          font-size: 2.4rem;
           line-height: 1.2;
         }
 
