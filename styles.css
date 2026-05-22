@@ -217,6 +217,21 @@ main {
 
 /* --- marquees --- */
 
+@keyframes marquee-fade-in {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}
+
+@keyframes marquee-enter-from-left {
+	from { clip-path: inset(0 100% 0 0); }
+	to   { clip-path: inset(0 0% 0 0%); }
+}
+
+@keyframes marquee-enter-from-right {
+	from { clip-path: inset(0 0% 0 100%); }
+	to   { clip-path: inset(0 0% 0 0%); }
+}
+
 .marquee {
 	width: 100%;
 	overflow: hidden;
@@ -229,6 +244,16 @@ main {
 		black 90%,
 		transparent
 	);
+}
+
+.marquee--right {
+	animation: marquee-enter-from-left 2.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+	animation-delay: 1s;
+}
+
+.marquee--left {
+	animation: marquee-enter-from-right 2.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+	animation-delay: 1.618s;
 }
 
 .marquee__track {
@@ -260,9 +285,24 @@ main {
 	to   { transform: translateX(0); }
 }
 
+hr.rule {
+	animation: marquee-fade-in 0.8s ease forwards;
+	animation-delay: 1.618s;
+	opacity: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.marquee__track {
 		animation: none;
+	}
+	.marquee--right,
+	.marquee--left,
+	hr.rule,
+	.ribbon {
+		animation: none;
+		opacity: 1;
+		clip-path: none;
+		transform: none;
 	}
 }
 
@@ -276,7 +316,6 @@ main {
 	min-height: 1.3em;
 	user-select: none;
 	cursor: default;
-	opacity: 0.8;
 }
 
 .epithet__item {
@@ -605,9 +644,18 @@ main {
 	cursor: zoom-in;
 }
 
+@keyframes ribbon-enter {
+	0%   { transform: translateY(110%); }
+	55%  { transform: translateY(-6%); }
+	75%  { transform: translateY(2%); }
+	100% { transform: translateY(0); }
+}
+
 /* --- ribbon banner --- */
 
 .ribbon {
+	animation: ribbon-enter 0.9s cubic-bezier(0.25, 0, 0.3, 1) both;
+	animation-delay: 2.2s;
 	position: absolute;
 	background: var(--glass-bg);
 	border-top: 1px solid var(--glass-border);
@@ -616,7 +664,7 @@ main {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	padding: var(--vr-3) var(--vr-5) var(--vr-4) 10dvw;
+	padding: var(--vr-4) var(--vr-5) var(--vr-4) 10dvw;
 	z-index: 3;
 	display: flex;
 	flex-direction: column;
@@ -626,15 +674,15 @@ main {
 	.ribbon__text {
 		font-size: clamp(10px, 1.4vw, 13px);
 		font-variation-settings: 'wght' 400, 'CRSV' 0, 'CASL' 0;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
+		letter-spacing: 0.04em;
 		opacity: 0.5;
 		margin: 0;
 	}
 	.ribbon__subtext {
 		font-size: clamp(14px, 2vw, 20px);
 		font-variation-settings: 'wght' 700, 'CRSV' 0.5, 'CASL' 0.4;
-		letter-spacing: -0.01em;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
 		opacity: 1;
 		margin: 0;
 	}
@@ -750,6 +798,13 @@ footer {
 .flipX {
 	display: inline-block;
 	transform: rotate(180deg);	
+}
+
+webring-widget {
+	--widget-top: 18px;
+	--widget-left: 18px;
+	--widget-bottom: auto;
+	--widget-right: auto;
 }
 
 /* hide ribbon in landscape on phones (height ≤ typical phone width) */
