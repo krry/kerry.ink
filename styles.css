@@ -714,7 +714,6 @@ hr.rule {
 	font-variation-settings: "wght" 400, "CASL" 0.2, "CRSV" 0, "MONO" 0;
 	line-height: 1.5;
 	width: 100%;
-	box-sizing: border-box;
 	background: color-mix(in srgb, var(--text) 6%, transparent);
 	border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
 	border-radius: 6px;
