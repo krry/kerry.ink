@@ -1,5 +1,5 @@
 const epithets = [
-	'fielding forays into welcomeness',
+	'peaceful warrior',
 	'software engineer',
 	'tropical honey farmer',
 	'experience designer',
