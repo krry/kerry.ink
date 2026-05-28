@@ -39,9 +39,9 @@ New `.work-teaser` section after the constellation. Contains 4 logo cards:
 
 | Client | Asset |
 |--------|-------|
-| Disney | `assets/work/disney/logo-disney.png` |
-| Arrivo | `assets/work/arrivo/logo-arrivo.png` |
-| SolarCity | `assets/work/solarcity/logo-solarcity.png` |
+| Disney Interactive | `assets/work/disney/logo-disney.png` |
+| Arrivo Hyperloop | `assets/work/arrivo/logo-arrivo.png` |
+| SolarCity (now Tesla) | `assets/work/solarcity/logo-solarcity.png` |
 | Tiny Health | `assets/work/tiny-health/logo-tiny-health.svg` |
 
 Each card: logo image + client name + link to `https://{client-url}`. Cards use `.glass` treatment. A "More work →" link follows the grid, pointing to `/work`.
@@ -122,9 +122,9 @@ Cards use `.glass` treatment, mobile-first grid (1 col on small, 2 col on medium
 
 | Client | Logo asset | Role (one-liner) | Link |
 |--------|-----------|------------------|------|
-| Disney | `logo-disney.png` | Product Manager — blazing the trail to Disney+ and Magic Bands | https://disney.com |
-| Arrivo | `logo-arrivo.png` | Operations Lead — envisioning the end of traffic | https://arrivoloop.com |
-| SolarCity | `logo-solarcity.png` | Lead UX Designer — full-stack design and development | https://solarcity.com |
+| Disney Interactive | `logo-disney.png` | Product Manager — blazing the trail to Disney+ and Magic Bands | https://disney.com |
+| Arrivo Hyperloop | `logo-arrivo.png` | Operations Lead — envisioning the end of traffic | https://arrivoloop.com |
+| SolarCity (now Tesla) | `logo-solarcity.png` | Lead UX Designer — full-stack design and development | https://solarcity.com |
 | Tiny Health | `logo-tiny-health.svg` | Lead Engineer — microbiome insights for parents | https://tinyhealth.com |
 | Heylo | `logo-heylo.svg` | Software Engineer — community platform for group organizers | https://heylo.com |
 | Togetherville | `logo-togetherville.png` | UX Designer — pioneering safe social for kids | https://togetherville.com |
