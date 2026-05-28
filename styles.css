@@ -846,11 +846,14 @@ webring-widget {
 	text-decoration: none;
 	padding: var(--vr-3) var(--vr-4);
 	border-radius: 100px;
-	border: 1px solid color-mix(in srgb, var(--muted) 45%, transparent);
-	transition: color var(--transition), border-color var(--transition);
+	background: var(--glass-bg);
+	border: 1px solid var(--glass-border);
+	backdrop-filter: blur(var(--blur));
+	-webkit-backdrop-filter: blur(var(--blur));
+	transition: color var(--transition), background var(--transition);
 	&:hover {
 		color: var(--text);
-		border-color: var(--muted);
+		background: var(--glass-thin-bg);
 	}
 }
 
