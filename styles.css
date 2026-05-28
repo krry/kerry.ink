@@ -825,3 +825,206 @@ webring-widget {
 		padding: 20px 20px;
 	}
 }
+
+/* --- sub-page compact hero --- */
+
+.hero--compact {
+	min-height: unset;
+	padding: var(--vr-7) var(--vr-5) var(--vr-5);
+}
+
+.hero--compact .links {
+	width: auto;
+	max-width: 600px;
+	padding: var(--vr-5) var(--vr-6);
+}
+
+/* --- more link --- */
+
+.more-link {
+	display: inline-block;
+	color: var(--muted);
+	font-size: 0.9rem;
+	font-variation-settings: "wght" 500, "CASL" 0.3, "CRSV" 0, "MONO" 0;
+	letter-spacing: 0.04em;
+	text-decoration: none;
+	padding: var(--vr-3) var(--vr-4);
+	border-radius: 100px;
+	border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+	transition: color var(--transition), border-color var(--transition);
+	&:hover {
+		color: var(--text);
+		border-color: color-mix(in srgb, var(--text) 38%, transparent);
+	}
+}
+
+.more-link-wrap {
+	display: flex;
+	justify-content: center;
+	padding: var(--vr-5) 0 var(--vr-6);
+}
+
+/* --- work teaser (homepage) --- */
+
+.work-teaser {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--vr-5);
+	padding: 10vh var(--vr-5) 15vh;
+}
+
+.work-teaser__heading {
+	margin: 0;
+	font-size: clamp(15px, 2.2vw, 22px);
+	font-variation-settings: "wght" 600, "CASL" 0.4, "CRSV" 0, "MONO" 0;
+	color: var(--muted);
+	text-align: center;
+	letter-spacing: -0.01em;
+}
+
+.work-teaser__grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: var(--vr-4);
+	width: 100%;
+	max-width: 580px;
+}
+
+@media (max-width: 480px) {
+	.work-teaser__grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* --- work card (teaser + directory) --- */
+
+.work-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: var(--vr-3);
+	padding: var(--vr-5);
+	border-radius: 16px;
+	text-decoration: none;
+	min-height: 110px;
+	transition: transform var(--transition) ease, box-shadow var(--transition) ease;
+	&:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 32px 100px var(--shadow);
+	}
+}
+
+.work-card__logo {
+	max-height: 36px;
+	max-width: 150px;
+	width: auto;
+	object-fit: contain;
+	display: block;
+}
+
+.work-card__name {
+	font-size: 0.78rem;
+	color: var(--muted);
+	font-variation-settings: "wght" 400, "CASL" 0.2, "CRSV" 0, "MONO" 0;
+	margin: 0;
+	text-align: center;
+}
+
+/* --- work directory (/work page) --- */
+
+.work-directory {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: var(--vr-5);
+	padding: 6vh var(--vr-5) 15vh;
+	max-width: 900px;
+	margin: 0 auto;
+	width: 100%;
+}
+
+@media (max-width: 600px) {
+	.work-directory {
+		grid-template-columns: 1fr;
+	}
+}
+
+.work-entry {
+	display: flex;
+	flex-direction: column;
+	gap: var(--vr-3);
+	padding: var(--vr-5);
+	border-radius: 16px;
+}
+
+.work-entry__logo {
+	max-height: 40px;
+	max-width: 180px;
+	width: auto;
+	object-fit: contain;
+	display: block;
+}
+
+.work-entry__name {
+	font-size: 1rem;
+	font-variation-settings: "wght" 700, "CASL" 0.3, "CRSV" 0, "MONO" 0;
+	color: var(--text);
+	text-decoration: none;
+	letter-spacing: -0.01em;
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+.work-entry__role {
+	font-size: 0.82rem;
+	color: var(--muted);
+	font-variation-settings: "wght" 400, "CASL" 0.2, "CRSV" 0, "MONO" 0;
+	margin: 0;
+	line-height: 1.5;
+}
+
+.work-entry__skills {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--vr-2);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* --- skill chips --- */
+
+.skill-chip {
+	font-size: 0.7rem;
+	padding: 2px 8px;
+	border-radius: 100px;
+	background: color-mix(in srgb, var(--text) 8%, transparent);
+	border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+	color: var(--muted);
+	font-variation-settings: "wght" 400, "CASL" 0, "CRSV" 0, "MONO" 0.5;
+	white-space: nowrap;
+}
+
+/* --- work logo theme adaptation --- */
+
+/* Heylo: white SVG fill — works dark mode (default), invert for light */
+.work-logo--invert-light {
+	filter: none;
+}
+@media (prefers-color-scheme: light) {
+	.work-logo--invert-light {
+		filter: invert(1) brightness(0.85);
+	}
+}
+
+/* Summon: dark logo on transparent — needs invert in dark mode */
+.work-logo--invert-dark {
+	filter: invert(1) brightness(0.9);
+}
+@media (prefers-color-scheme: light) {
+	.work-logo--invert-dark {
+		filter: none;
+	}
+}
