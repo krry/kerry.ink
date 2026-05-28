@@ -553,6 +553,7 @@ hr.rule {
 	display: flex;
 	gap: 0.5rem;
 	flex-wrap: wrap;
+	margin-top: var(--vr-4);
 }
 
 .beta-signup__input {
@@ -585,6 +586,7 @@ hr.rule {
 	padding: 0.5rem 1.1rem;
 	transition: background 0.15s, border-color 0.15s;
 	white-space: nowrap;
+	margin-left: auto;
 }
 .beta-signup__btn:hover {
 	background: color-mix(in srgb, var(--accent) 28%, transparent);
