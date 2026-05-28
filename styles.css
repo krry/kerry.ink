@@ -850,18 +850,18 @@ webring-widget {
 	text-decoration: none;
 	padding: var(--vr-3) var(--vr-4);
 	border-radius: 100px;
-	border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+	border: 1px solid color-mix(in srgb, var(--muted) 45%, transparent);
 	transition: color var(--transition), border-color var(--transition);
 	&:hover {
 		color: var(--text);
-		border-color: color-mix(in srgb, var(--text) 38%, transparent);
+		border-color: var(--muted);
 	}
 }
 
 .more-link-wrap {
 	display: flex;
 	justify-content: center;
-	padding: var(--vr-5) 0 var(--vr-6);
+	padding: var(--vr-4) 0;
 }
 
 /* --- work teaser (homepage) --- */
