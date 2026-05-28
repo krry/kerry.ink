@@ -123,10 +123,24 @@ Cards use `.glass` treatment, mobile-first grid (1 col on small, 2 col on medium
 | Escuela Marin | `logo-escuela-marin.svg` | Designer — gauging interest in a bilingual school | — |
 | Talk Social | *(hero image)* | Full-stack Developer — serendipitous remote conversation | — |
 
-### 4c. Logo notes
+### 4c. Light/dark logo strategy
 
-- Heylo logo has white fill — wrap in a dark `.glass` card or invert via CSS filter for light mode
-- Talk Social has no logo; use `talk-social-01.jpg` from krry.dev as a card hero image instead
+The site uses `prefers-color-scheme` — dark by default, light override. Logos must adapt.
+
+**`<picture>` with media query** for clients that have both variants:
+```html
+<picture>
+  <source srcset="logo-disney.png" media="(prefers-color-scheme: light)">
+  <img src="logo-disney-dark.png" alt="Disney">
+</picture>
+```
+Clients with dark variants in krry.dev: Disney, Arrivo, SolarCity, Mandarin9, BMNT.
+
+**SVG `currentColor`** for SVGs we own: modify Tiny Health and Escuela Marin fills to `currentColor` so they inherit `--text` automatically. Heylo's SVG is white-fill only — use CSS `filter: invert(1)` under `prefers-color-scheme: light`.
+
+**CSS filter fallback** for single-variant PNGs (Togetherville, Summon, Outline): apply `filter: invert(1) brightness(0.85)` under `prefers-color-scheme: light` if the logo appears on a dark background, or vice versa. Check visually; not all logos invert cleanly — if a logo looks bad inverted, use it as-is and accept the contrast trade-off.
+
+- Talk Social has no logo; use `talk-social-01.jpg` as a card hero image instead.
 
 ---
 
@@ -136,17 +150,17 @@ Copy from `krry.dev/src/lib/assets/projects/` into `kerry.ink/assets/work/`:
 
 ```
 assets/work/
-  arrivo/       logo-arrivo.png, logo-arrivo-dark.png
-  bmnt/         logo-bmnt.png
-  disney/       logo-disney.png, logo-disney-dark.png
+  arrivo/        logo-arrivo.png, logo-arrivo-dark.png
+  bmnt/          logo-bmnt.png, logo-bmnt-dark.png
+  disney/        logo-disney.png, logo-disney-dark.png
   escuela-marin/ logo-escuela-marin.svg
-  mandarin9/    logo-mandarin9.png
-  outline/      logo-outline.png
-  solarcity/    logo-solarcity.png, logo-solarcity-dark.png
-  summon/       logo-summon.png
-  talk-social/  talk-social-01.jpg
-  tiny-health/  logo-tiny-health.svg  ← already downloaded
-  togetherville/ logo-togetherville.png
+  mandarin9/     logo-mandarin9.png, logo-mandarin9-dark.png
+  outline/       logo-outline.png
+  solarcity/     logo-solarcity.png, logo-solarcity-dark.png
+  summon/        logo-summon.png
+  talk-social/   talk-social-01.jpg
+  tiny-health/   logo-tiny-health.svg  ← already downloaded
+  togetherville/  logo-togetherville.png
   heylo/        logo-heylo.svg        ← already downloaded
 ```
 
