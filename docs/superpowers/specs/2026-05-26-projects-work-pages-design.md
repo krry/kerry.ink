@@ -62,11 +62,18 @@ Standalone page. Structure:
 
 ```
 <a class="name" href="/">Kerry Alan Snyder</a>
+<section class="hero hero--compact">
+  <nav class="glass links">
+    <h1 class="headline">Projects</h1>
+  </nav>
+</section>
 <section class="constellation">
   [All 9 projects + interlude quotes, same HTML as current index.html]
 </section>
 <footer>...</footer>
 ```
+
+`setupMorph('.headline')` in `main.js` applies the variable font ripple to the page title automatically — no JS changes needed. The `hero--compact` modifier strips marquee height so the banner is tight above the content.
 
 Projects in order (matching current index.html sequence):
 1. Integrating Thauma
@@ -90,6 +97,11 @@ Standalone page. Structure:
 
 ```
 <a class="name" href="/">Kerry Alan Snyder</a>
+<section class="hero hero--compact">
+  <nav class="glass links">
+    <h1 class="headline">Work</h1>
+  </nav>
+</section>
 <section class="work-directory">
   [12 client cards]
 </section>
@@ -168,8 +180,10 @@ assets/work/
 
 ## 6. CSS additions (in `styles.css`)
 
+- `.hero--compact` — modifier that removes marquee min-height; banner sits tight above content
 - `.work-teaser` section layout — matches constellation spacing
 - `.work-card` — logo card with glass treatment, logo centered, name below
 - `.work-directory` — 1→2 column responsive grid
 - `.skill-chip` — small pill tag for skill labels
 - `"More projects →"` / `"More work →"` link style — subtle, inline, matches site voice
+- Logo light/dark overrides via `@media (prefers-color-scheme: light)` for CSS filter fallbacks
