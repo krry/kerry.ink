@@ -918,29 +918,23 @@ webring-widget {
 .work-card__body {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	align-items: center;
 	gap: var(--vr-3);
 	padding: var(--vr-4);
 }
 
 .work-card__logo {
-	max-height: 28px;
-	max-width: 120px;
+	height: 32px;
+	max-width: 140px;
 	width: auto;
 	object-fit: contain;
 	display: block;
 }
 
-.work-card__name {
-	font-size: 0.78rem;
-	color: var(--muted);
-	font-variation-settings: "wght" 400, "CASL" 0.2, "CRSV" 0, "MONO" 0;
-	margin: 0;
-}
-
 .work-card__skills {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 	gap: var(--vr-2);
 	list-style: none;
 	margin: 0;
@@ -971,6 +965,15 @@ webring-widget {
 	gap: var(--vr-3);
 	padding: var(--vr-5);
 	border-radius: 16px;
+	overflow: hidden;
+}
+
+.work-entry__thumb {
+	width: calc(100% + 2 * var(--vr-5));
+	height: 160px;
+	object-fit: cover;
+	display: block;
+	margin: calc(-1 * var(--vr-5)) calc(-1 * var(--vr-5)) 0;
 }
 
 .work-entry__logo {
