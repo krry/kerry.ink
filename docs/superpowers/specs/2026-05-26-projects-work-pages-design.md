@@ -31,7 +31,7 @@ Show only the first 4 projects in order:
 4. Beta signup block (stays in place between SVNR and Feelies)
 5. Feelies
 
-After Feelies, add a "More projects →" link pointing to `/projects`. Remove orfx, inkwell, LevelOut, nameless, easeness, and their interlude quotes from `index.html` — they move to `projects.html`.
+After Feelies, add a "More projects →" link pointing to `/projects`. Remove all interlude quotes and the orfx, inkwell, LevelOut, nameless, easeness projects from `index.html` — they move to `projects.html`. Interludes tell a story and belong to the full immersive scroll on `/projects`, not the homepage scan.
 
 ### 2b. Work teaser section
 
