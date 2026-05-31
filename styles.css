@@ -84,6 +84,19 @@ body {
 	pointer-events: none;
 }
 
+@media (prefers-color-scheme: light) {
+	.vignette {
+		background:
+			radial-gradient(
+				ellipse 100% 60% at 50% 55%,
+				rgba(255, 255, 255, 0.12),
+				rgba(255, 255, 255, 0.52) 60%,
+				rgba(255, 255, 255, 0.78) 100%
+			),
+			linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.48));
+	}
+}
+
 /* --- name stamp --- */
 
 .name {
