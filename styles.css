@@ -406,9 +406,64 @@ hr.rule {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 1rem;
+	gap: var(--vr-5);
 	padding: 25vh var(--vr-5) 40vh;
 	overflow-y: auto;
+}
+
+.gratitude__grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: var(--vr-4);
+	width: 100%;
+	max-width: 580px;
+}
+
+@media (max-width: 480px) {
+	.gratitude__grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+.gratitude-cell {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: var(--vr-3);
+	padding: var(--vr-5) var(--vr-4);
+	border-radius: 16px;
+	text-decoration: none;
+	transition: transform var(--transition) ease, box-shadow var(--transition) ease;
+	&:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 32px 100px var(--shadow);
+	}
+}
+
+.gratitude-cell__logo {
+	width: 52px;
+	height: 52px;
+	object-fit: contain;
+	border-radius: 12px;
+}
+
+.gratitude-cell__logo--mono {
+	filter: invert(0);
+}
+
+@media (prefers-color-scheme: light) {
+	.gratitude-cell__logo--mono {
+		filter: invert(1);
+	}
+}
+
+.gratitude-cell__caption {
+	font-size: 0.65em;
+	color: var(--muted);
+	text-align: center;
+	letter-spacing: 0.02em;
+	line-height: 1.4;
 }
 
 .gratitude__card {
@@ -416,21 +471,6 @@ hr.rule {
 	width: 100%;
 	max-width: 480px;
 	border-radius: 16px;
-	ul {
-		margin: 0;
-	}
-	.attr {
-		opacity: 0.8;
-	}
-	a.attr:hover {
-		text-decoration: underline;
-	}
-	.thank-you {
-		opacity: 1;
-		font-size: 1.2em;
-		margin-top: 2rem;
-		margin-left: -1em;
-	}
 }
 
 .project {
