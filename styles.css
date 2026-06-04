@@ -448,6 +448,18 @@ hr.rule {
 	border-radius: 12px;
 }
 
+.gratitude-cell__wordmark {
+	font-family: Recursive, monospace;
+	font-size: 0.85em;
+	font-variation-settings: "wght" 900, "CASL" 1, "MONO" 0;
+	letter-spacing: -0.03em;
+	color: var(--text);
+	line-height: 1;
+	height: 52px;
+	display: flex;
+	align-items: center;
+}
+
 .gratitude-cell__logo--mono {
 	filter: invert(0);
 }
