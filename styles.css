@@ -375,6 +375,48 @@ hr.rule {
 }
 
 
+/* --- huemorphing link pills, ported from Yessy's Draw card: a full 360° hue rotation
+   (~58s, linear, like its `nebula-hue`) starting at each treasure's own hue —
+   qi 80° (Zuben), jing 217° (Yessy), shen 354° (Suno) --- */
+
+@property --hue {
+	syntax: "<number>";
+	inherits: false;
+	initial-value: 0;
+}
+
+.links__track a.link--qi,
+.links__track a.link--jing,
+.links__track a.link--shen {
+	--hue: var(--hue-base);
+	background: hsl(var(--hue) 60% 60% / 0.22);
+	border-color: hsl(var(--hue) 60% 72% / 0.35);
+	animation: huemorph 58s linear infinite;
+}
+
+.links__track a.link--qi { --hue-base: 80; }
+.links__track a.link--jing { --hue-base: 217; }
+.links__track a.link--shen { --hue-base: 354; }
+
+.links__track a.link--qi:hover,
+.links__track a.link--jing:hover,
+.links__track a.link--shen:hover {
+	background: hsl(var(--hue) 60% 60% / 0.34);
+	border-color: hsl(var(--hue) 60% 76% / 0.5);
+}
+
+@keyframes huemorph {
+	from { --hue: var(--hue-base); }
+	to { --hue: calc(var(--hue-base) + 360); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.links__track a.link--qi,
+	.links__track a.link--jing {
+		animation: none;
+	}
+}
+
 /* --- headline letter morph --- */
 
 .hl {
@@ -896,6 +938,10 @@ webring-widget {
 	padding: var(--vr-7) var(--vr-5) var(--vr-5);
 }
 
+.hero--compact + .constellation {
+	padding-top: 15vh;
+}
+
 .hero--compact .links {
 	width: auto;
 	max-width: 600px;
@@ -1115,4 +1161,49 @@ webring-widget {
 	.work-logo--invert-dark {
 		filter: none;
 	}
+}
+
+.project__badge {
+	display: block;
+	width: fit-content;
+	margin: var(--vr-6) auto 0;
+	line-height: 0;
+}
+
+.project__badge img {
+	height: 40px;
+	width: auto;
+}
+
+.project__links {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: var(--vr-3);
+	margin-top: var(--vr-5);
+}
+
+.project__link {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 14px;
+	border-radius: 999px;
+	border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+	background: color-mix(in srgb, var(--text) 6%, transparent);
+	color: inherit;
+	text-decoration: none;
+	font-size: 14px;
+	transition: transform 120ms ease, background-color 120ms ease;
+}
+
+.project__link img {
+	width: 18px;
+	height: 18px;
+	display: block;
+}
+
+.project__link:hover {
+	transform: scale(0.96);
+	background: color-mix(in srgb, var(--text) 12%, transparent);
 }

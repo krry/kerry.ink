@@ -50,7 +50,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..1000,0..1,0..1,0..1&display=swap" rel="stylesheet">
 
-        <link rel="stylesheet" href="./styles.css" />
+        <link rel="stylesheet" href="./styles.css?v=zl1" />
     </head>
     <body>
         <div class="bg" aria-hidden="true"></div>
@@ -81,9 +81,6 @@
                     <div class="marquee marquee--left" aria-label="Link marquee">
                         <div class="marquee__track links__track" id="linksTrack">
                             <div class="marquee__set">
-                                <a href="./assets/resume-kerry-alan-snyder-2026.pdf">Résumé</a>
-                                <a href="https://level.out.kerry.ink">LevelOut</a>
-                                <a href="https://suno.com/playlist/f63b96cf-43c5-4e42-aacb-23cbfd1e6b28">97.5 KRRY</a>
                                 <a
                                     class="link--icon"
                                     href="https://github.com/krry"
@@ -94,8 +91,13 @@
                                     </svg>
                                     <span class="sr-only">GitHub</span>
                                 </a>
-
                                 <a href="https://orfx.kerry.ink">orfx</a>
+                                <a href="./assets/resume-kerry-alan-snyder-2026.pdf">Résumé</a>
+                                <a href="https://level.out.kerry.ink">LevelOut</a>
+                                <a class="link--shen" href="https://suno.com/playlist/f63b96cf-43c5-4e42-aacb-23cbfd1e6b28">97.5 KRRY</a>
+                                <a class="link--qi" href="https://kerryourself.substack.com">Zuben Chronicles</a>
+
+                                <a class="link--jing" href="https://yessy.kerry.ink">Yessy</a>
 
                                 <a
                                     class="link--icon"
@@ -168,6 +170,40 @@
 
             <!-- Constellation — featured projects -->
             <section class="constellation" aria-label="Projects">
+
+                <div class="project">
+                    <figure class="project__shot">
+                        <img src="./assets/shots/zuben-chronicles.webp" alt="Zuben Chronicles — an elk leaping through rainbow clouds above a snowy peak" loading="lazy" />
+                    </figure>
+                    <div class="glass project__card">
+                        <a href="https://kerryourself.substack.com" class="project__name">Zuben Chronicles</a>
+                        <p class="project__desc">An ancient and future saga of the mystical, mythical, and magical wonders of dreamtime and earthsong.</p>
+                        <p class="project__date">Companion story to Integrating Thauma ➠ publishing daily on Substack</p>
+                        <div class="project__links">
+                            <a href="https://open.spotify.com/show/4btc1gToFg3lQV5upcKu2R" class="project__link" aria-label="Listen on Spotify" title="Listen on Spotify"><img src="./assets/brands/spotify.svg" alt="" width="18" height="18" loading="lazy" /><span>Spotify</span></a>
+                            <a href="https://podcasts.apple.com/us/podcast/zuben-chronicles/id6818298286" class="project__link" aria-label="Listen on Apple Podcasts" title="Listen on Apple Podcasts"><img src="./assets/brands/applepodcasts.svg" alt="" width="18" height="18" loading="lazy" /><span>Apple Podcasts</span></a>
+                            <a href="https://kerryourself.substack.com/podcast" class="project__link" aria-label="Read and listen on Substack" title="Read and listen on Substack"><img src="./assets/brands/substack.svg" alt="" width="18" height="18" loading="lazy" /><span>Substack</span></a>
+                            <a href="https://chat.whatsapp.com/D6Va0yOPmaM0y9XpPyn2GK?s=sh&amp;p=i&amp;mlu=0" class="project__link" aria-label="Join the book club on WhatsApp" title="Join the book club on WhatsApp"><img src="./assets/brands/whatsapp.svg" alt="" width="18" height="18" loading="lazy" /><span>WhatsApp</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project">
+                    <figure class="project__shot">
+                        <img src="./assets/shots/yessy.webp" alt="Yessy app screenshot" loading="lazy" />
+                    </figure>
+                    <div class="glass project__card">
+                        <a href="https://yessy.kerry.ink" class="project__name">Yessy</a>
+                        <p class="project__desc">A game of reflection for you and those you love and trust. Deep, hard, funny questions. Share your answers, and add new questions. Learn to expand. Totally confidential and free.</p>
+                        <p class="project__date">Conceived August 2026 ➠ iOS</p>
+                        <a href="https://apps.apple.com/us/app/yessy/id6811156153" class="project__badge" aria-label="Download Yessy on the App Store">
+                            <picture>
+                                <source srcset="./assets/app-store-badge-white.svg" media="(prefers-color-scheme: dark)" />
+                                <img src="./assets/app-store-badge-black.svg" alt="Download on the App Store" width="120" height="40" loading="lazy" />
+                            </picture>
+                        </a>
+                    </div>
+                </div>
 
                 <div class="project">
                     <figure class="project__shot">
