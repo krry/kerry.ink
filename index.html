@@ -51,15 +51,20 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..1000,0..1,0..1,0..1&display=swap" rel="stylesheet">
 
-        <link rel="stylesheet" href="./styles.css?v=zl2" />
+        <link rel="stylesheet" href="./styles.css?v=work4" />
     </head>
     <body>
         <div class="bg" aria-hidden="true"></div>
         <div class="vignette" aria-hidden="true"></div>
-        <div class="ribbon">
+        <div class="ribbon" hidden>
             <p class="ribbon__subtext">Augmented authorship · Agentic development · Prompt engineering</p>
             <p class="ribbon__text">Now offering consulting, coaching, contracts for select clients in summer and fall 2026 · <a class="ribbon__link" href="mailto:hello@kerry.ink">hello@kerry.ink</a></p>
         </div>
+        <a class="scroll-cue" href="#projects" aria-label="Scroll to projects">
+            <svg viewBox="0 0 44 44" width="44" height="44" aria-hidden="true">
+                <path d="M12 17l10 10 10-10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </a>
         <a class="name" href="/" aria-label="Kerry Alan Snyder">Kerry Alan Snyder</a>
 
         <main>
@@ -170,11 +175,11 @@
             </section>
 
             <!-- Constellation — featured projects -->
-            <section class="constellation" aria-label="Projects">
+            <section class="constellation" id="projects" aria-label="Projects">
 
                 <div class="project">
-                    <figure class="project__shot">
-                        <img src="./assets/shots/zuben-chronicles.webp" alt="Zuben Chronicles — an elk leaping through rainbow clouds above a snowy peak" loading="lazy" />
+                    <figure class="project__shot project__shot--wide">
+                        <img src="./assets/shots/zuben-panorama.webp" alt="Zuben Chronicles — a leaping elk trailing a rainbow above a mountain valley, with villagers on one shore and a crystalline figure rising from a red-sand beach on the other" loading="lazy" />
                     </figure>
                     <div class="glass project__card">
                         <a href="https://kerryourself.substack.com" class="project__name">Zuben Chronicles</a>
@@ -401,6 +406,6 @@
             position="top-left"
         ></webring-widget>
 
-        <script type="module" src="./main.js"></script>
+        <script type="module" src="./main.js?v=epi1"></script>
     </body>
 </html>
