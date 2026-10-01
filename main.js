@@ -358,7 +358,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('year').textContent = new Date().getFullYear();
 });
 
-document.querySelector('#subscribe').addEventListener('submit', async (e) => {
+document.querySelector('#subscribe')?.addEventListener('submit', async (e) => {
   e.preventDefault();
   const email = e.target.email.value;
   await fetch('/api/subscribe', {

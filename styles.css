@@ -1176,8 +1176,8 @@ webring-widget {
 }
 
 .project__links {
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(2, max-content);
 	justify-content: center;
 	gap: var(--vr-3);
 	margin-top: var(--vr-5);
@@ -1185,6 +1185,7 @@ webring-widget {
 
 .project__link {
 	display: inline-flex;
+	justify-content: center;
 	align-items: center;
 	gap: 8px;
 	padding: 8px 14px;
