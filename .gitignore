@@ -1,1 +1,7 @@
 .vercel
+
+# local masters and alternates (kept on disk, not published)
+assets/kerry.ink-logo.png
+assets/kerry.ink-wordmark.png
+assets/og-image-v1.jpg
+assets/og-card-dark.jpg
