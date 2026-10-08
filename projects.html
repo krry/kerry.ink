@@ -27,7 +27,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..1000,0..1,0..1,0..1&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./styles.css?v=wm1" />
+        <link rel="stylesheet" href="./styles.css?v=ys2" />
     </head>
     <body>
         <div class="bg" aria-hidden="true"></div>
@@ -64,7 +64,10 @@
 
                 <div class="project">
                     <figure class="project__shot">
-                        <img src="./assets/shots/yessy.webp" alt="Yessy app screenshot" loading="lazy" />
+                        <picture>
+                            <source srcset="./assets/shots/yessy-dark.webp" media="(prefers-color-scheme: dark)" />
+                            <img src="./assets/shots/yessy-light.webp" alt="Yessy app screenshot" width="1000" height="2174" loading="lazy" />
+                        </picture>
                     </figure>
                     <div class="glass project__card">
                         <a href="https://yessy.kerry.ink" class="project__name">Yessy</a>
